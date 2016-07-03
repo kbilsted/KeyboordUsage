@@ -1,58 +1,38 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Newtonsoft.Json;
+using KeyboordUsage.Configuration.UserState;
 
 namespace KeyboordUsage
 {
 	public class KeysCounter
 	{
-		public Tuple<DateTime, DateTime> Interval;
-		public Dictionary<Keys, int> records = new Dictionary<Keys, int>();
+		private readonly UserState state;
 
-		private KeysCounter()
+		public KeysCounter(UserState state)
 		{
-			Interval = new Tuple<DateTime, DateTime>(DateTime.Now, DateTime.Now);
+			this.state = state;
 		}
-
-		public KeysCounter(Tuple<DateTime,DateTime> interval)
-		{
-			this.Interval = interval;
-		}
-
-		private Keys previous;
 
 		public void Add(Keys key)
 		{
-			if (records.ContainsKey(key))
-			{
-				records[key] += 1;
-			}
-			else
-			{
-				records[key] = 1;
-			}
+			state.GetAccumulated().Add(key);
+			state.GetCurrentSession().Add(key);
+		}
+
+		public Dictionary<Keys, int> GetRecords()
+		{
+			return state.GetAccumulated().Records;
 		}
 
 		public void Clear()
 		{
-			records.Clear();
+			state.Clear();
 		}
 
-		public IEnumerable<KeyValuePair<Keys, int>> GetTopxx()
+		public IEnumerable<KeyValuePair<Keys, int>> GetAccumulatedKeyPopularity()
 		{
-			return records.OrderByDescending(x => x.Value);
-		}
-
-		public string ToJson()
-		{
-			return JsonConvert.SerializeObject(this, Formatting.Indented);
-		}
-
-		public static KeysCounter ReadJson(string json)
-		{
-			return JsonConvert.DeserializeObject<KeysCounter>(json);
+			return GetRecords().OrderByDescending(x => x.Value);
 		}
 	}
 }	

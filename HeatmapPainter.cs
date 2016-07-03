@@ -23,7 +23,7 @@ namespace KeyboordUsage
 			var sumButtons = new Dictionary<Button, int>();
 			foreach (var kv in keyboard.Button2Keydata)
 			{
-				var sumButton = counter.records
+				var sumButton = counter.GetRecords()
 					.Where(x => kv.Value.Contains(x.Key.ToString()))
 					.Sum(x => x.Value);
 				sumButtons.Add(kv.Key, sumButton);

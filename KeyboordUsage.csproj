@@ -66,6 +66,8 @@
     </ApplicationDefinition>
     <Compile Include="Configuration\Keyboard\JsonKeyboard.cs" />
     <Compile Include="Configuration\Keyboard\KeyboardConfiguration.cs" />
+    <Compile Include="Configuration\UserState\RecodingSession.cs" />
+    <Compile Include="Configuration\UserState\UserState.cs" />
     <Compile Include="ExceptionShower.cs" />
     <Compile Include="GuiKeyboard.cs" />
     <Compile Include="HeatmapPainter.cs" />

@@ -14,19 +14,19 @@ namespace KeyboordUsage
 	public class KeyboardKListener
 	{
 		private GuiKeyboard keyboard;
-		private readonly string path;
 		private readonly Action<string> updateCurrentKey;
 		private readonly Action<string> updateKeyHistory;
 		private IKeyboardMouseEvents globalHook;
 		public readonly KeysCounter Counter;
 
-		public KeyboardKListener(GuiKeyboard keyboard, string path, Action<string> updateCurrentKey, Action<string> updateKeyHistory)
+		public KeyboardKListener(GuiKeyboard keyboard, Action<string> updateCurrentKey, Action<string> updateKeyHistory, KeysCounter counter)
 		{
 			this.keyboard = keyboard;
-			this.path = path;
 			this.updateCurrentKey = updateCurrentKey;
 			this.updateKeyHistory = updateKeyHistory;
+			this.Counter = counter;
 			OnStartup();
+
 		}
 
 		public void Subscribe()
@@ -103,29 +103,14 @@ namespace KeyboordUsage
 
 		public void OnStartup()
 		{
-			if (File.Exists(path))
-			{
-				Counter = KeysCounter.ReadJson(File.ReadAllText(path));
-				new HeatmapPainter(keyboard, Counter).Do();
-			}
-			else
-			{
-				Counter = new KeysCounter(Tuple.Create(new DateTime(1900,1,1), new DateTime(2100,1,1)));
-			}
+			updateKeyHistory(GetKeyPopularity());
+
+			new HeatmapPainter(keyboard, Counter).Do();
 		}
 
 		public void Closing()
 		{
-			try
-			{
-				Unsubscribe();
-				var counters = Counter.ToJson();
-				File.WriteAllText(path, counters, Encoding.UTF8);
-			}
-			catch (Exception ex) 
-			{
-				ExceptionShower.Do(ex);
-			}
+			Unsubscribe();
 		}
 	}
 }

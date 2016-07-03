@@ -3,9 +3,12 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using KeyboordUsage.Configuration.Keyboard;
+using KeyboordUsage.Configuration.UserState;
+using Newtonsoft.Json;
 
 namespace KeyboordUsage
 {
@@ -16,19 +19,42 @@ namespace KeyboordUsage
 	{
 		private KeyboardKListener listener;
 		readonly JsonKeyboard[] keyboards;
+		private readonly KeysCounter counter;
+		UserState state;
 
 		public MainWindow()
 		{
 			InitializeComponent();
 
 			keyboards = GetKeyboards();
+
+			state = UserState.LoadFromJson(GetStatePath());
+			counter = new KeysCounter(state);
+
 			KeyboardChooser.ItemsSource = keyboards.Select(x => x.Name);
 			KeyboardChooser.SelectedIndex = 0;
 		}
 
 		private void Closeing(object sender, CancelEventArgs e)
 		{
-			listener.Closing();
+			try
+			{
+				if (File.Exists(GetStatePath()))
+				{
+					var tempFileName = Path.GetTempFileName();
+					File.Delete(tempFileName);
+					File.Move(GetStatePath(), tempFileName);
+				}
+
+				var stateJson = JsonConvert.SerializeObject(state, Formatting.Indented);
+				File.WriteAllText(GetStatePath(), stateJson, Encoding.UTF8);
+
+				listener.Closing();
+			}
+			catch (Exception ex)
+			{
+				ExceptionShower.Do(ex);
+			}
 		}
 
 		JsonKeyboard[] GetKeyboards()
@@ -47,6 +73,11 @@ namespace KeyboordUsage
 			var pathOfExe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 			var userStatePath = Path.Combine(pathOfExe, "Configuration", "Keyboard");
 			return userStatePath;
+		}
+
+		private static string GetStatePath()
+		{
+			return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "KeyboordUsage.json");
 		}
 
 		private GuiKeyboard currentSelectedHeatmap;
@@ -75,8 +106,7 @@ namespace KeyboordUsage
 
 			if (listener == null)
 			{
-				var pp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "KeyboordUsage.json");
-				listener = new KeyboardKListener(currentSelectedHeatmap, pp, x => CurrentKey.Content = x, x => KeyHistory.Text = x);
+				listener = new KeyboardKListener(currentSelectedHeatmap, x => CurrentKey.Content = x, x => KeyHistory.Text = x, counter);
 				listener.Subscribe();
 			}
 			else
