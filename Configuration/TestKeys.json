@@ -1,0 +1,49 @@
+﻿{
+	"KeyboardName": "Testing keys",
+	"Rows": [
+		{
+			"Keys": [
+				{ "Label1": "Esc", "KeyCode": "Escape" },
+				{ "HorizontalSpace": "True" },
+				{ "Label1": "F1", "KeyCode": "F2" },
+				{ "Label1": "F2", "KeyCode": "F1" },
+				{ "Label1": "F3", "KeyCode": "F3" },
+				{ "Label1": "F4", "KeyCode": "F4" },
+				{ "HorizontalSpace": "True", "Width" : 0.3 },
+				{ "Label1": "F5", "KeyCode": "F5" },
+				{ "Label1": "F6", "KeyCode": "F6" },
+				{ "Label1": "F7", "KeyCode": "F7" },
+				{ "Label1": "F8", "KeyCode": "F8" },
+				{ "HorizontalSpace": "True", "Width" : 0.3 },
+				{ "Label1": "F9", "KeyCode": "F9" },
+				{ "Label1": "F10", "KeyCode": "F10" },
+				{ "Label1": "F11", "KeyCode": "F11" },
+				{ "Label1": "F12", "KeyCode": "F12" },
+				{ "HorizontalSpace": "True", "Width" : 0.3 },
+				{ "Label1" : "Prt"  , "KeyCode" :"PrScrn"},
+				{ "Label1" : "Scr"  , "KeyCode" :"SrcLk"},
+				{ "Label1" : "Pause", "KeyCode" :"Pause"},
+			]
+		},
+		{
+			"Keys": [
+				{ "Label1": "Esc", "KeyCode": "1Escape" },
+				{ "Label1": "F1", "KeyCode": "1F1" },
+				{ "Label1": "F2", "KeyCode": "1F2" },
+				{ "Label1": "F5", "KeyCode": "4F5", "Width":"2" },
+				{ "Label1": "F5", "KeyCode": "3F5", "Width":"2" },
+				{ "Label1": "F5", "KeyCode": "1F5", "Width":"2" },
+				{ "Label1": "F8", "KeyCode": "1F8" },
+			]
+		},
+		{
+			"Keys": [
+				{ "Label1": "F5", "KeyCode": "34F5", "Width":"3" },
+				{ "Label1": "F5", "KeyCode": "33F5", "Width":"3" },
+				{ "Label1": "F5", "KeyCode": "31F5", "Width":"3" },
+				{ "Label1": "F8", "KeyCode": "41F8" },
+			]
+		},
+	]
+}
+
