@@ -41,9 +41,9 @@ namespace KeyboordUsage
 				var heatMapColor = CreateHeatColor(value, max);
 
 				var shadow = Color.FromArgb(heatMapColor.A, 
-					(byte) Math.Max(0, heatMapColor.R - 34),
-					(byte) Math.Max(0, heatMapColor.G - 34), 
-					(byte) Math.Max(0, heatMapColor.B - 34));
+					(byte) Math.Max(0, heatMapColor.R - 40),
+					(byte) Math.Max(0, heatMapColor.G - 40), 
+					(byte) Math.Max(0, heatMapColor.B - 40));
 
 				button.Background = new LinearGradientBrush()
 				{

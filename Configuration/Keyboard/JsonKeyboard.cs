@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Newtonsoft.Json;
 
-namespace KeyboordUsage.Configuration
+namespace KeyboordUsage.Configuration.Keyboard
 {
 	public class JsonKeyboard : AbsKeyboardUICreator
 	{

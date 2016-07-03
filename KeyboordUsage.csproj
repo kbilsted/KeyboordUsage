@@ -64,13 +64,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Configuration\JsonKeyboard.cs" />
-    <Compile Include="Configuration\KeyboardConfiguration.cs" />
+    <Compile Include="Configuration\Keyboard\JsonKeyboard.cs" />
+    <Compile Include="Configuration\Keyboard\KeyboardConfiguration.cs" />
     <Compile Include="ExceptionShower.cs" />
     <Compile Include="GuiKeyboard.cs" />
     <Compile Include="HeatmapPainter.cs" />
     <Compile Include="KeyboardKListener.cs" />
-    <Compile Include="Configuration\AbsKeyboardUICreator.cs" />
+    <Compile Include="Configuration\Keyboard\AbsKeyboardUICreator.cs" />
     <Compile Include="KeysCounter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -103,10 +103,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="Configuration\danishTenKeyLess.json">
+    <Content Include="Configuration\Keyboard\danishTenKeyLess.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Configuration\TestKeys.json">
+    <Content Include="Configuration\Keyboard\TestKeys.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />

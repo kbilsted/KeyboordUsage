@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace KeyboordUsage.Configuration
+namespace KeyboordUsage.Configuration.Keyboard
 {
 	/// <summary>
 	/// Helpers for different kinds of configuration formats

@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using KeyboordUsage.Configuration;
-using Button = System.Windows.Controls.Button;
+using KeyboordUsage.Configuration.Keyboard;
 
 namespace KeyboordUsage
 {
@@ -35,20 +33,20 @@ namespace KeyboordUsage
 
 		JsonKeyboard[] GetKeyboards()
 		{
-			var path = Path.Combine(GetPathOfExe(), "Configuration");
-
 			var style = (Style)FindResource("InformButton");
 
 			return 
-			new DirectoryInfo(path).EnumerateFiles("*.json")
+			new DirectoryInfo(GetConfigPath()).EnumerateFiles("*.json")
 				.Select(x => new { FileName=x, Content= File.ReadAllText(x.FullName)})
 				.Select(x => new JsonKeyboard(style, x.Content, x.FileName.FullName))
 				.ToArray();
 		}
 
-		private static string GetPathOfExe()
+		private static string GetConfigPath()
 		{
-			return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			var pathOfExe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			var userStatePath = Path.Combine(pathOfExe, "Configuration", "Keyboard");
+			return userStatePath;
 		}
 
 		private GuiKeyboard currentSelectedHeatmap;

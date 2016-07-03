@@ -18,7 +18,7 @@ namespace KeyboordUsage
 		private readonly Action<string> updateCurrentKey;
 		private readonly Action<string> updateKeyHistory;
 		private IKeyboardMouseEvents globalHook;
-		public KeysCounter Counter;
+		public readonly KeysCounter Counter;
 
 		public KeyboardKListener(GuiKeyboard keyboard, string path, Action<string> updateCurrentKey, Action<string> updateKeyHistory)
 		{
@@ -42,13 +42,14 @@ namespace KeyboordUsage
 		public void ChangeKeyboard(GuiKeyboard newKeyboard)
 		{
 			this.keyboard = newKeyboard;
+			updateKeyHistory(GetKeyPopularity());
 		}
 
-		private string cachedTop10="";
+		private string cachedKeyPopularity="";
 
 		private int keypresses = 0;
 
-		private Keys previousKeyData = Keys.None;
+		//private Keys previousKeyData = Keys.None;
 
 		private void RecordKeyUp(object sender, KeyEventArgs e)
 		{
@@ -63,11 +64,10 @@ namespace KeyboordUsage
 
 			if (keypresses % 10 == 0)
 			{
-				int no = 0;
-				cachedTop10 = string.Join("\n", Counter.GetTopxx().Select(x => (++no) +". "+ x.ToString()));
+				cachedKeyPopularity = GetKeyPopularity();
 			}
 
-			updateKeyHistory(cachedTop10);
+			updateKeyHistory(cachedKeyPopularity);
 
 			//if (keypresses%5 == 0)
 			{
@@ -75,6 +75,12 @@ namespace KeyboordUsage
 			}
 
 			keypresses++;
+		}
+
+		private string GetKeyPopularity()
+		{
+			int no = 0;
+			return string.Join("\n", Counter.GetAccumulatedKeyPopularity().Select(x => (++no) +". "+ x.ToString()));
 		}
 
 		private void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)

@@ -22,32 +22,32 @@
 				{ "HorizontalSpace": "True", "Width" : 0.3 },
 				{ "Label1" : "Prt"  , "KeyCode" :"PrintScreen"},
 				{ "Label1" : "Scr"  , "KeyCode" :"Scroll"},
-				{ "Label1" : "Pause", "KeyCode" :"Pause"},
+				{ "Label1" : "Pause", "KeyCode" :"Pause"}
 			]
 		},
 		{
-			"IsVertialSpacer": "True", "Height" : 0.05 ,
+			"IsVertialSpacer": "True", "Height" : 0.05 
 		},
 		{
 			"Keys": [
-				{ "Label1": "§", "Label2" : "½", "KeyCode": "Oem5",  },
-				{ "Label1": "!", "Label2" : "1", "KeyCode": "D1", },
-				{ "Label1": "\"", "Label2" : "2", "KeyCode": "D2", },
-				{ "Label1": "#", "Label2" : "3", "KeyCode": "D3",  },
-				{ "Label1": "¤", "Label2" : "4", "KeyCode": "D4",  },
-				{ "Label1": "%", "Label2" : "5", "KeyCode": "D5",  },
-				{ "Label1": "&", "Label2" : "6", "KeyCode": "D6",  },
-				{ "Label1": "/", "Label2" : "7", "KeyCode": "D7",  },
-				{ "Label1": "(", "Label2" : "8", "KeyCode": "D8",  },
-				{ "Label1": ")", "Label2" : "9", "KeyCode": "D9",  },
-				{ "Label1": "=", "Label2" : "0", "KeyCode": "D0",  },
-				{ "Label1": "?", "Label2" : "+", "KeyCode": "Oemplus",   },
-				{ "Label1": "`", "Label2" : "´", "KeyCode": "OemOpenBrackets",   },
+				{ "Label1": "§", "Label2" : "½", "KeyCode": "Oem5"  },
+				{ "Label1": "!", "Label2" : "1", "KeyCode": "D1" },
+				{ "Label1": "\"", "Label2" : "2", "KeyCode": "D2" },
+				{ "Label1": "#", "Label2" : "3", "KeyCode": "D3"  },
+				{ "Label1": "¤", "Label2" : "4", "KeyCode": "D4"  },
+				{ "Label1": "%", "Label2" : "5", "KeyCode": "D5"  },
+				{ "Label1": "&", "Label2" : "6", "KeyCode": "D6"  },
+				{ "Label1": "/", "Label2" : "7", "KeyCode": "D7"  },
+				{ "Label1": "(", "Label2" : "8", "KeyCode": "D8"  },
+				{ "Label1": ")", "Label2" : "9", "KeyCode": "D9"  },
+				{ "Label1": "=", "Label2" : "0", "KeyCode": "D0"  },
+				{ "Label1": "?", "Label2" : "+", "KeyCode": "Oemlus"   },
+				{ "Label1": "`", "Label2" : "´", "KeyCode": "OemOpenBrackets"   },
 				{ "Label1": "Backspace", "KeyCode": "Back", "Width":3},
 				{ "HorizontalSpace": "True", "Width" : 0.5 },
 				{ "Label1": "Ins", "KeyCode": "Insert" },
 				{ "Label1": "Home", "KeyCode": "Home" },
-				{ "Label1": "PgUp", "KeyCode": "PageUp" },
+				{ "Label1": "PgUp", "KeyCode": "PageUp" }
 			]
 		},
 		{
@@ -68,7 +68,7 @@
 				{ "HorizontalSpace": "True", "Width" : 3.7 },
 				{ "Label1": "Del", "KeyCode": "Delete" },
 				{ "Label1": "End", "KeyCode": "End" },
-				{ "Label1": "PgDn", "KeyCode": "Next" },
+				{ "Label1": "PgDn", "KeyCode": "Next" }
 			]
 		},
 		{
@@ -86,7 +86,7 @@
 				{ "Label1": "Æ", "KeyCode": "Oemtilde" },
 				{ "Label1": "Ø", "KeyCode": "Oem7" },
 				{ "Label1": "'", "Label2" : "*", "KeyCode": "OemQuestion" },
-				{ "Label1": "Enter", "KeyCode": "Enter", "Width": 2},
+				{ "Label1": "Enter", "KeyCode": "Enter", "Width": 2}
 			]
 		},
 		{
@@ -105,7 +105,7 @@
 				{ "Label1": "-", "Label2" : "_", "KeyCode" : "OemMinus" },
 				{ "Label1": "Shift", "KeyCode": "RShiftKey", "Width": 4.5 },
 				{ "HorizontalSpace": "True", "Width" : 2.4 },
-				{ "Label1": "↑", "KeyCode": "Up" },
+				{ "Label1": "↑", "KeyCode": "Up" }
 			]
 		},
 		{
@@ -121,10 +121,10 @@
 				{ "HorizontalSpace": "True", "Width" : 0.6 },
 				{ "Label1": "←", "KeyCode": "Left" },
 				{ "Label1": "↓", "KeyCode": "Down" },
-				{ "Label1": "→", "KeyCode": "Right" },
+				{ "Label1": "→", "KeyCode": "Right" }
 
 			]
-		},
+		}
 	]
 }
 	 

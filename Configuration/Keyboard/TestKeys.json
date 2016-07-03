@@ -22,7 +22,7 @@
 				{ "HorizontalSpace": "True", "Width" : 0.3 },
 				{ "Label1" : "Prt"  , "KeyCode" :"PrScrn"},
 				{ "Label1" : "Scr"  , "KeyCode" :"SrcLk"},
-				{ "Label1" : "Pause", "KeyCode" :"Pause"},
+				{ "Label1" : "Pause", "KeyCode" :"Pause"}
 			]
 		},
 		{
@@ -33,7 +33,7 @@
 				{ "Label1": "F5", "KeyCode": "4F5", "Width":"2" },
 				{ "Label1": "F5", "KeyCode": "3F5", "Width":"2" },
 				{ "Label1": "F5", "KeyCode": "1F5", "Width":"2" },
-				{ "Label1": "F8", "KeyCode": "1F8" },
+				{ "Label1": "F8", "KeyCode": "1F8" }
 			]
 		},
 		{
@@ -41,9 +41,9 @@
 				{ "Label1": "F5", "KeyCode": "34F5", "Width":"3" },
 				{ "Label1": "F5", "KeyCode": "33F5", "Width":"3" },
 				{ "Label1": "F5", "KeyCode": "31F5", "Width":"3" },
-				{ "Label1": "F8", "KeyCode": "41F8" },
+				{ "Label1": "F8", "KeyCode": "41F8" }
 			]
-		},
+		}
 	]
 }
 
