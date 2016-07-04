@@ -33,7 +33,7 @@ namespace KeyboordUsage.Configuration
 			{
 				var tempFileName = Path.GetTempFileName();
 				File.Delete(tempFileName);
-				File.Move(GetStatePath(), tempFileName);
+				File.Move(GetStatePath(), tempFileName+".KeyboordUsage.bak");
 			}
 
 			var stateJson = JsonConvert.SerializeObject(state, Formatting.Indented);
