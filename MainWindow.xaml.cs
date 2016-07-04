@@ -23,6 +23,7 @@ namespace KeyboordUsage
 		readonly KeysCounter counter;
 		UserState state;
 		readonly FileHandler fileHandler = new FileHandler(); 
+		KeyPressPainter keyPressPainter;
 
 		public MainWindow()
 		{
@@ -77,12 +78,15 @@ namespace KeyboordUsage
 
 			if (listener == null)
 			{
-				listener = new KeyboardListener(currentSelectedHeatmap, x => CurrentKey.Content = x, x => KeyHistory.Text = x, counter);
+				keyPressPainter = new KeyPressPainter(() => IsVisible, x => CurrentKey.Content = x, x => KeyHistory.Text = x, counter, currentSelectedHeatmap);
+				keyPressPainter.OnStartup();
+
+				listener = new KeyboardListener(counter, keyPressPainter);
 				listener.Subscribe();
 			}
 			else
 			{
-				listener.ChangeKeyboard(currentSelectedHeatmap);
+				keyPressPainter.ChangeKeyboard(currentSelectedHeatmap);
 			}
 		}
 

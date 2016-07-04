@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Gma.System.MouseKeyHook;
 using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
 
@@ -7,20 +6,14 @@ namespace KeyboordUsage
 {
 	public class KeyboardListener
 	{
-		private GuiKeyboard keyboard;
-		private readonly Action<string> updateCurrentKey;
-		private readonly Action<string> updateKeyHistory;
 		private IKeyboardMouseEvents globalHook;
 		public readonly KeysCounter Counter;
+		readonly KeyPressPainter keyPressPainter;
 
-		public KeyboardListener(GuiKeyboard keyboard, Action<string> updateCurrentKey, Action<string> updateKeyHistory, KeysCounter counter)
+		public KeyboardListener(KeysCounter counter, KeyPressPainter keyPressPainter)
 		{
-			this.keyboard = keyboard;
-			this.updateCurrentKey = updateCurrentKey;
-			this.updateKeyHistory = updateKeyHistory;
 			this.Counter = counter;
-			OnStartup();
-
+			this.keyPressPainter = keyPressPainter;
 		}
 
 		public void Subscribe()
@@ -32,18 +25,7 @@ namespace KeyboordUsage
 			globalHook.KeyUp += RecordKeyUp;
 		}
 
-		public void ChangeKeyboard(GuiKeyboard newKeyboard)
-		{
-			this.keyboard = newKeyboard;
-			updateKeyHistory(GetKeyPopularity());
-		}
-
-		private string cachedKeyPopularity="";
-
-		private int keypresses = 0;
-
 		//private Keys previousKeyData = Keys.None;
-
 		private void RecordKeyUp(object sender, KeyEventArgs e)
 		{
 			//if(previousKeyData == e.KeyData)
@@ -52,28 +34,7 @@ namespace KeyboordUsage
 			// det skal kun være ctrl og shift vi skal frasortere...
 
 			Counter.Add(e.KeyData);
-
-			updateCurrentKey(e.KeyData.ToString()); //string current = "code " + e.KeyCode + " value: " + e.KeyValue + " data: "+e.KeyData ;
-
-			if (keypresses % 10 == 0)
-			{
-				cachedKeyPopularity = GetKeyPopularity();
-			}
-
-			updateKeyHistory(cachedKeyPopularity);
-
-			//if (keypresses%5 == 0)
-			{
-				new HeatmapPainter(keyboard, Counter).Do();
-			}
-
-			keypresses++;
-		}
-
-		private string GetKeyPopularity()
-		{
-			int no = 0;
-			return string.Join("\n", Counter.GetAccumulatedKeyPopularity().Select(x => (++no) +". "+ x.ToString()));
+			keyPressPainter.Paint(e.KeyData);
 		}
 
 		private void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)
@@ -84,7 +45,7 @@ namespace KeyboordUsage
 			// if (e.Buttons == MouseButtons.Middle) { e.Handled = true; }
 		}
 
-		public void Unsubscribe()
+		private void Unsubscribe()
 		{
 			globalHook.MouseDownExt -= GlobalHookMouseDownExt;
 			globalHook.KeyUp -= RecordKeyUp;
@@ -92,13 +53,6 @@ namespace KeyboordUsage
 
 			//It is recommened to dispose it
 			globalHook.Dispose();
-		}
-
-		public void OnStartup()
-		{
-			updateKeyHistory(GetKeyPopularity());
-
-			new HeatmapPainter(keyboard, Counter).Do();
 		}
 
 		public void Closing()
