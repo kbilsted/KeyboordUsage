@@ -12,8 +12,8 @@
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
-				<MenuItem Header="_MenuItem_ClearStatistics"  Click="MenuItem_ClearStatistics"/>
-				<MenuItem Header="_About" Click="MenuItem_About"/>
+				<MenuItem Header="_Clear statistics..."  Click="MenuItem_ClearStatistics"/>
+				<MenuItem Header="_About..." Click="MenuItem_About"/>
 				<Separator />
 				<MenuItem Header="_Exit" Click="MenuItem_Exit"/>
 			</MenuItem>

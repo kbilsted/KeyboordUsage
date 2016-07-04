@@ -88,8 +88,14 @@ namespace KeyboordUsage
 
 		private void MenuItem_ClearStatistics(object sender, RoutedEventArgs e)
 		{
-			listener.Counter.Clear();
-			ChangeKeyboard(KeyboardChooser.SelectedIndex);
+			var answer = MessageBox.Show(this, "Are you sure you want to loose all changes?", "Clear recorded statistics",
+				MessageBoxButton.YesNo);
+
+			if (answer == MessageBoxResult.Yes)
+			{
+				listener.Counter.Clear();
+				ChangeKeyboard(KeyboardChooser.SelectedIndex);
+			}
 		}
 
 		private void MenuItem_About(object sender, RoutedEventArgs e)
