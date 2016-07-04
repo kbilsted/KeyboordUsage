@@ -7,28 +7,28 @@ namespace KeyboordUsage
 	public class KeyPressPainter
 	{
 		private string cachedKeyPopularity = "";
-		private int nextRepaint = 1;
-		private int repaintDela = 1;
+		private int nextRepaint = 10;
+		private const int repaintDela = 1024;
 		private GuiKeyboard keyboard;
 
-		Func<bool> isWindowVisible;
+		Func<bool> isWindowMinimized;
 		private readonly Action<string> updateCurrentKey;
-		private readonly Action<string> updateKeyHistory;
+		private readonly Action<string> updateKeyPopularity;
 		private readonly KeysCounter counter;
 		private int keypresses = 0;
 
-		public KeyPressPainter(Func<bool> isWindowVisible, Action<string> updateCurrentKey, Action<string> updateKeyHistory, KeysCounter counter, GuiKeyboard keyboard)
+		public KeyPressPainter(Func<bool> isWindowMinimized, Action<string> updateCurrentKey, Action<string> updateKeyPopularity, KeysCounter counter, GuiKeyboard keyboard)
 		{
-			this.isWindowVisible = isWindowVisible;
+			this.isWindowMinimized = isWindowMinimized;
 			this.updateCurrentKey = updateCurrentKey;
-			this.updateKeyHistory = updateKeyHistory;
+			this.updateKeyPopularity = updateKeyPopularity;
 			this.counter = counter;
 			this.keyboard = keyboard;
 		}
 
-		public void OnStartup()
+		public void ForceRepaint()
 		{
-			updateKeyHistory(GetKeyPopularity());
+			updateKeyPopularity(GetKeyPopularity());
 
 			new HeatmapPainter(keyboard, counter).Do();
 		}
@@ -36,7 +36,7 @@ namespace KeyboordUsage
 		public void ChangeKeyboard(GuiKeyboard newKeyboard)
 		{
 			keyboard = newKeyboard;
-			updateKeyHistory(GetKeyPopularity());
+			updateKeyPopularity(GetKeyPopularity());
 		}
 
 		private string GetKeyPopularity()
@@ -47,23 +47,30 @@ namespace KeyboordUsage
 
 		public void Paint(Keys keyData)
 		{
-			updateCurrentKey(keyData.ToString()); //string current = "code " + e.KeyCode + " value: " + e.KeyValue + " data: "+e.KeyData ;
-
-			if (keypresses % 10 == 0)
+			if (RepaintAlmostOnlyWhenVisible())
 			{
-				cachedKeyPopularity = GetKeyPopularity();
-			}
+				updateCurrentKey(keyData.ToString()); //string current = "code " + e.KeyCode + " value: " + e.KeyValue + " data: "+e.KeyData ;
 
-			updateKeyHistory(cachedKeyPopularity);
+				if (keypresses % 2 == 0)
+					cachedKeyPopularity = GetKeyPopularity();
 
-			if (keypresses == nextRepaint)
-			{
-				nextRepaint += ++repaintDela;
-
+				updateKeyPopularity(cachedKeyPopularity);
 				new HeatmapPainter(keyboard, counter).Do();
 			}
-
+			
 			keypresses++;
+		}
+
+		private bool RepaintAlmostOnlyWhenVisible()
+		{
+			if (isWindowMinimized())
+				return true;
+
+			if (keypresses < nextRepaint)
+				return false;
+
+			nextRepaint = keypresses + repaintDela;
+			return true;
 		}
 	}
 }

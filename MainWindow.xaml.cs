@@ -78,8 +78,8 @@ namespace KeyboordUsage
 
 			if (listener == null)
 			{
-				keyPressPainter = new KeyPressPainter(() => IsVisible, x => CurrentKey.Content = x, x => KeyHistory.Text = x, counter, currentSelectedHeatmap);
-				keyPressPainter.OnStartup();
+				keyPressPainter = new KeyPressPainter(() => WindowState == WindowState.Minimized, x => CurrentKey.Content = x, x => KeyHistory.Text = x, counter, currentSelectedHeatmap);
+				keyPressPainter.ForceRepaint();
 
 				listener = new KeyboardListener(counter, keyPressPainter);
 				listener.Subscribe();
@@ -105,7 +105,9 @@ namespace KeyboordUsage
 		private void MenuItem_About(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show(this, @"Listen to your keyboooord!
-A simple keyboard usage monitor that respects your privacy!
+A simple keyboard usage monitor that respects your privacy! 
+
+You can minimize CPU usage by minimizing the window when you are not looking at it.
 
 You can easily define your own keyboard layouts and share them on GitHub. Just take outset in the *.json files accompanying the .exe file
  
@@ -115,6 +117,14 @@ Made by Kasper B. Graversen 2016- ", "About...", MessageBoxButton.OK);
 		private void MenuItem_Exit(object sender, RoutedEventArgs e)
 		{
 			Application.Current.Shutdown();
+		}
+
+		private void MainWindow_OnWindowStateChanged(object sender, EventArgs e)
+		{
+			if (keyPressPainter != null)
+			{
+				keyPressPainter.ForceRepaint();
+			}
 		}
 	}
 }
