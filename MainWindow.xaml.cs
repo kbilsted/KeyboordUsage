@@ -17,7 +17,7 @@ namespace KeyboordUsage
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private KeyboardKListener listener;
+		private KeyboardListener listener;
 		readonly JsonKeyboard[] keyboards;
 		private readonly KeysCounter counter;
 		UserState state;
@@ -106,7 +106,7 @@ namespace KeyboordUsage
 
 			if (listener == null)
 			{
-				listener = new KeyboardKListener(currentSelectedHeatmap, x => CurrentKey.Content = x, x => KeyHistory.Text = x, counter);
+				listener = new KeyboardListener(currentSelectedHeatmap, x => CurrentKey.Content = x, x => KeyHistory.Text = x, counter);
 				listener.Subscribe();
 			}
 			else

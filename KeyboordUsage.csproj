@@ -71,7 +71,7 @@
     <Compile Include="ExceptionShower.cs" />
     <Compile Include="GuiKeyboard.cs" />
     <Compile Include="HeatmapPainter.cs" />
-    <Compile Include="KeyboardKListener.cs" />
+    <Compile Include="KeyboardListener.cs" />
     <Compile Include="Configuration\Keyboard\AbsKeyboardUICreator.cs" />
     <Compile Include="KeysCounter.cs" />
     <Page Include="MainWindow.xaml">

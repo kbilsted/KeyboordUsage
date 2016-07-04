@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using Gma.System.MouseKeyHook;
-using Button = System.Windows.Controls.Button;
 using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
-using TextBox = System.Windows.Controls.TextBox;
 
 namespace KeyboordUsage
 {
-	public class KeyboardKListener
+	public class KeyboardListener
 	{
 		private GuiKeyboard keyboard;
 		private readonly Action<string> updateCurrentKey;
@@ -19,7 +13,7 @@ namespace KeyboordUsage
 		private IKeyboardMouseEvents globalHook;
 		public readonly KeysCounter Counter;
 
-		public KeyboardKListener(GuiKeyboard keyboard, Action<string> updateCurrentKey, Action<string> updateKeyHistory, KeysCounter counter)
+		public KeyboardListener(GuiKeyboard keyboard, Action<string> updateCurrentKey, Action<string> updateKeyHistory, KeysCounter counter)
 		{
 			this.keyboard = keyboard;
 			this.updateCurrentKey = updateCurrentKey;
@@ -31,7 +25,6 @@ namespace KeyboordUsage
 
 		public void Subscribe()
 		{
-			// Note: for the application hook, use the Hook.AppEvents() instead
 			globalHook = Hook.GlobalEvents();
 
 			globalHook.MouseDownExt += GlobalHookMouseDownExt;
