@@ -51,7 +51,6 @@ namespace KeyboordUsage
 			}
 		}
 
-		private GuiKeyboard currentSelectedHeatmap;
 
 		private void KeyboardChooser_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
@@ -71,7 +70,8 @@ namespace KeyboordUsage
 			var newKeyboard = keyboards[selectedIndex];
 
 			var result = newKeyboard.Do();
-			currentSelectedHeatmap = result.Item2;
+
+			var currentSelectedHeatmap = result.Item2;
 			Keyboard.Children.Clear();
 			Keyboard.Children.Add(result.Item1);
 
