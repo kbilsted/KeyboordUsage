@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace KeyboordUsage.Configuration.UserState
+namespace KeyboordUsage.Configuration.UserStates
 {
 	public class RecodingSession
 	{
@@ -16,8 +16,7 @@ namespace KeyboordUsage.Configuration.UserState
 		}
 
 		public void Add(Keys key)
-
-{
+		{
 			if (Records.ContainsKey(key))
 			{
 				Records[key] += 1;
@@ -26,8 +25,6 @@ namespace KeyboordUsage.Configuration.UserState
 			{
 				Records[key] = 1;
 			}
-
 		}
-
 	}
 }

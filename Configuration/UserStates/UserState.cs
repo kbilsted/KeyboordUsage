@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
-namespace KeyboordUsage.Configuration.UserState
+namespace KeyboordUsage.Configuration.UserStates
 {
 	public class UserState
 	{

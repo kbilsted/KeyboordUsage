@@ -6,8 +6,9 @@ using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using KeyboordUsage.Configuration;
 using KeyboordUsage.Configuration.Keyboard;
-using KeyboordUsage.Configuration.UserState;
+using KeyboordUsage.Configuration.UserStates;
 using Newtonsoft.Json;
 
 namespace KeyboordUsage
@@ -17,18 +18,20 @@ namespace KeyboordUsage
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private KeyboardListener listener;
+		KeyboardListener listener;
 		readonly JsonKeyboard[] keyboards;
-		private readonly KeysCounter counter;
+		readonly KeysCounter counter;
 		UserState state;
+		readonly FileHandler fileHandler = new FileHandler(); 
 
 		public MainWindow()
 		{
 			InitializeComponent();
 
-			keyboards = GetKeyboards();
+			var style = (Style)FindResource("InformButton");
+			keyboards = fileHandler.GetKeyboards(style);
 
-			state = UserState.LoadFromJson(GetStatePath());
+			state = fileHandler.LoadUserState();
 			counter = new KeysCounter(state);
 
 			KeyboardChooser.ItemsSource = keyboards.Select(x => x.Name);
@@ -39,45 +42,13 @@ namespace KeyboordUsage
 		{
 			try
 			{
-				if (File.Exists(GetStatePath()))
-				{
-					var tempFileName = Path.GetTempFileName();
-					File.Delete(tempFileName);
-					File.Move(GetStatePath(), tempFileName);
-				}
-
-				var stateJson = JsonConvert.SerializeObject(state, Formatting.Indented);
-				File.WriteAllText(GetStatePath(), stateJson, Encoding.UTF8);
-
+				fileHandler.StoreUserState(state);
 				listener.Closing();
 			}
 			catch (Exception ex)
 			{
 				ExceptionShower.Do(ex);
 			}
-		}
-
-		JsonKeyboard[] GetKeyboards()
-		{
-			var style = (Style)FindResource("InformButton");
-
-			return 
-			new DirectoryInfo(GetConfigPath()).EnumerateFiles("*.json")
-				.Select(x => new { FileName=x, Content= File.ReadAllText(x.FullName)})
-				.Select(x => new JsonKeyboard(style, x.Content, x.FileName.FullName))
-				.ToArray();
-		}
-
-		private static string GetConfigPath()
-		{
-			var pathOfExe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			var userStatePath = Path.Combine(pathOfExe, "Configuration", "Keyboard");
-			return userStatePath;
-		}
-
-		private static string GetStatePath()
-		{
-			return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "KeyboordUsage.json");
 		}
 
 		private GuiKeyboard currentSelectedHeatmap;

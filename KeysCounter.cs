@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using KeyboordUsage.Configuration.UserState;
+using KeyboordUsage.Configuration.UserStates;
 
 namespace KeyboordUsage
 {

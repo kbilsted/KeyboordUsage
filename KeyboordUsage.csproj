@@ -64,10 +64,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Configuration\FileHandler.cs" />
     <Compile Include="Configuration\Keyboard\JsonKeyboard.cs" />
     <Compile Include="Configuration\Keyboard\KeyboardConfiguration.cs" />
-    <Compile Include="Configuration\UserState\RecodingSession.cs" />
-    <Compile Include="Configuration\UserState\UserState.cs" />
+    <Compile Include="Configuration\UserStates\RecodingSession.cs" />
+    <Compile Include="Configuration\UserStates\UserState.cs" />
     <Compile Include="ExceptionShower.cs" />
     <Compile Include="GuiKeyboard.cs" />
     <Compile Include="HeatmapPainter.cs" />
