@@ -62,7 +62,6 @@ namespace KeyboordUsage
 			}
 		}
 
-
 		private void KeyboardChooser_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			try

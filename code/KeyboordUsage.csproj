@@ -113,7 +113,7 @@
     <Content Include="Configuration\Keyboard\QWERTY-Danish-Tenkeyless.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Configuration\Keyboard\TestKeys.json">
+    <Content Include="Configuration\Keyboard\QWERTY-UK-Tenkeyless.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
