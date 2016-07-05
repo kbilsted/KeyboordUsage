@@ -18,12 +18,11 @@ namespace KeyboordUsage
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		KeyboardListener listener;
+		readonly KeyboardListener listener;
 		readonly JsonKeyboard[] keyboards;
-		readonly KeysCounter counter;
 		readonly UserState state;
 		readonly FileHandler fileHandler = new FileHandler(); 
-		KeyPressController keyPressController;
+		readonly KeyPressController keyPressController;
 
 		public MainWindow()
 		{
@@ -33,7 +32,17 @@ namespace KeyboordUsage
 			keyboards = fileHandler.GetKeyboards(style);
 
 			state = fileHandler.LoadUserState();
-			counter = new KeysCounter(state);
+			var counter = new KeysCounter(state);
+
+			keyPressController = new KeyPressController(
+				() => WindowState == WindowState.Minimized,
+				x => CurrentKey.Content = x,
+				x => KeyHistory.Text = x,
+				counter,
+				null);
+
+			listener = new KeyboardListener(counter, keyPressController);
+			listener.Subscribe();
 
 			ResizeWindow(state);
 
@@ -79,29 +88,11 @@ namespace KeyboordUsage
 		{
 			var result = keyboards[selectedIndex].CreateWpfKeys();
 
-			var currentSelectedHeatmap = result.Item2;
 			Keyboard.Children.Clear();
 			Keyboard.Children.Add(result.Item1);
 
-			if (listener == null)
-			{
-				keyPressController = new KeyPressController(
-					() => WindowState == WindowState.Minimized, 
-					x => CurrentKey.Content = x,
-					x => KeyHistory.Text = x, 
-					counter, 
-					currentSelectedHeatmap);
-
-				keyPressController.ForceRepaint();
-
-				listener = new KeyboardListener(counter, keyPressController);
-				listener.Subscribe();
-			}
-			else
-			{
-				keyPressController.ChangeKeyboard(currentSelectedHeatmap);
-				keyPressController.ForceRepaint();
-			}
+			keyPressController.ChangeKeyboard(result.Item2);
+			keyPressController.ForceRepaint();
 
 			state.GuiConfiguration.SelectedKeyboardIndex = selectedIndex;
 		}
@@ -125,7 +116,7 @@ A simple keyboard usage monitor that respects your privacy!
 
 You can minimize CPU usage by minimizing the window when you are not looking at it.
 
-You can easily define your own keyboard layouts and share them on GitHub. Just take outset in the *.json files accompanying the .exe file
+You can easily define your own keyboard layouts and share them on GitHub. Just take outset in the *.json files accompanying the .exe file (the configuration folder),
 
 Backups of the keypresses are made on every program exit to your temp folder, often 'C:\Users\XXX\AppData\Local\Temp'
 Made by Kasper B. Graversen 2016- ", "About...", MessageBoxButton.OK);
