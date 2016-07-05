@@ -27,7 +27,7 @@ namespace KeyboordUsage.Configuration.Keyboard
 			if (height == 0)
 				height = 0.1;
 
-			var space = CreateButton(width, height, "", "");
+			var space = CreateButton(width, height, "", "", null, null);
 			space.Visibility=Visibility.Hidden;
 			row.Children.Add(space);
 		}
@@ -52,8 +52,10 @@ namespace KeyboordUsage.Configuration.Keyboard
 			row.Children.Add(button);
 		}
 
-		protected Button CreateButton(double width, double height, string topText, string bottomText)
+		protected Button CreateButton(double width, double height, string topText, string bottomText, string toprightText, string bottomRightText)
 		{
+			var topButtonText = topText + " " + (toprightText ?? "");
+			var bottomButtonText = bottomText + " " + (bottomRightText ?? "");
 			var button = new Button()
 			{
 				Style = style,
@@ -70,13 +72,13 @@ namespace KeyboordUsage.Configuration.Keyboard
 						{
 							HorizontalAlignment = HorizontalAlignment.Left,
 							VerticalAlignment = VerticalAlignment.Top,
-							Text = topText,
+							Text = topButtonText,
 						},
 						new TextBlock()
 						{
 							HorizontalAlignment = HorizontalAlignment.Left,
 							VerticalAlignment = VerticalAlignment.Bottom,
-							Text = bottomText,
+							Text = bottomButtonText,
 						}
 					}
 				}

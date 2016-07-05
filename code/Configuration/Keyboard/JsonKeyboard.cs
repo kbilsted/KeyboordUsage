@@ -45,7 +45,7 @@ namespace KeyboordUsage.Configuration.Keyboard
 					}
 					else
 					{
-						var button = CreateButton(key.Width*NormalWidth, NormalHeight, key.Label1, key.Label2);
+						var button = CreateButton(key.Width*NormalWidth, NormalHeight, key.Label1, key.Label2, key.Label3, key.Label4);
 
 						var keyCodes = stdcodes.Select(x => key.KeyCode + ", " + x).Concat(new[] { key.KeyCode }).ToArray();
 						AddKey(heatmap, uiRow, button, keyCodes );
