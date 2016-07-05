@@ -109,7 +109,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="Configuration\Keyboard\danishTenKeyLess.json">
+    <Content Include="Configuration\Keyboard\QWERTY-Danish-Tenkeyless.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Configuration\Keyboard\TestKeys.json">

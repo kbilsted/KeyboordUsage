@@ -1,5 +1,5 @@
 ﻿{
-	"KeyboardName": "Danish tenkeyless",
+	"KeyboardName": "Qwerty Danish tenkeyless",
 	"Rows": [
 		{
 			"Keys": [
@@ -37,11 +37,11 @@
 				{ "Label1": "¤", "Label2" : "4", "KeyCode": "D4"  },
 				{ "Label1": "%", "Label2" : "5", "KeyCode": "D5"  },
 				{ "Label1": "&", "Label2" : "6", "KeyCode": "D6"  },
-				{ "Label1": "/", "Label2" : "7", "KeyCode": "D7"  },
-				{ "Label1": "(", "Label2" : "8", "KeyCode": "D8"  },
-				{ "Label1": ")", "Label2" : "9", "KeyCode": "D9"  },
-				{ "Label1": "=", "Label2" : "0", "KeyCode": "D0"  },
-				{ "Label1": "?", "Label2" : "+", "KeyCode": "Oemlus"   },
+				{ "Label1": "/", "Label2" : "7", "Label4": "  {", "KeyCode": "D7"  },
+				{ "Label1": "(", "Label2" : "8", "Label4": "  [", "KeyCode": "D8"  },
+				{ "Label1": ")", "Label2" : "9", "Label4": "  ]", "KeyCode": "D9"  },
+				{ "Label1": "=", "Label2" : "0", "Label4": "  }", "KeyCode": "D0"  },
+				{ "Label1": "?", "Label2" : "+", "KeyCode": "Oemplus"   },
 				{ "Label1": "`", "Label2" : "´", "KeyCode": "OemOpenBrackets"   },
 				{ "Label1": "Backspace", "KeyCode": "Back", "Width":3},
 				{ "HorizontalSpace": "True", "Width" : 0.5 },
@@ -64,7 +64,7 @@
 				{ "Label1": "O", "KeyCode": "O" },
 				{ "Label1": "P", "KeyCode": "P" },
 				{ "Label1": "Å", "KeyCode": "Oem6" },
-				{ "Label1": "^", "Label2" : "~", "KeyCode": "Oem1" },
+				{ "Label1": "^", "Label2" : "¨", "Label4" : " ~", "KeyCode": "Oem1" },
 				{ "HorizontalSpace": "True", "Width" : 3.7 },
 				{ "Label1": "Del", "KeyCode": "Delete" },
 				{ "Label1": "End", "KeyCode": "End" },
@@ -85,14 +85,14 @@
 				{ "Label1": "L", "KeyCode": "L" },
 				{ "Label1": "Æ", "KeyCode": "Oemtilde" },
 				{ "Label1": "Ø", "KeyCode": "Oem7" },
-				{ "Label1": "'", "Label2" : "*", "KeyCode": "OemQuestion" },
+				{ "Label1": "*", "Label2" : "'", "KeyCode": "OemQuestion" },
 				{ "Label1": "Enter", "KeyCode": "Enter", "Width": 2}
 			]
 		},
 		{
 			"Keys": [
 				{ "Label1": "Shift", "KeyCode": "LShiftKey", "Width":1.3 },
-				{ "Label1": "<", "Label2" : ">", "Label3":"\\", "KeyCode": "OemBackslash" },
+				{ "Label1": "<", "Label2" : ">", "Label4":" \\", "KeyCode": "OemBackslash" },
 				{ "Label1": "Z", "KeyCode": "Z" },
 				{ "Label1": "X", "KeyCode": "X" },
 				{ "Label1": "C", "KeyCode": "C" },
@@ -100,8 +100,8 @@
 				{ "Label1": "B", "KeyCode": "B" },
 				{ "Label1": "N", "KeyCode": "N" },
 				{ "Label1": "M", "KeyCode": "M" },
-				{ "Label1": ",", "KeyCode": "Oemcomma" },
-				{ "Label1": ".", "KeyCode": "OemPeriod" },
+				{ "Label1": ";", "Label2": ",", "KeyCode": "Oemcomma" },
+				{ "Label1": ":", "Label2": ".", "KeyCode": "OemPeriod" },
 				{ "Label1": "-", "Label2" : "_", "KeyCode" : "OemMinus" },
 				{ "Label1": "Shift", "KeyCode": "RShiftKey", "Width": 4.5 },
 				{ "HorizontalSpace": "True", "Width" : 2.4 },
@@ -114,7 +114,7 @@
 				{ "Label1": "Win", "KeyCode": "LWin", "Width":1.3 },
 				{ "Label1": "Alt", "KeyCode": "LMenu", "Width":1.3 },
 				{ "Label1": "Space", "KeyCode": "Space", "Width": 11 },
-				{ "Label1": "Alt", "KeyCode": "RMenu", "Width":1.3 },
+				{ "Label1": "AltGr", "KeyCode": "RMenu", "Width":1.3 },
 				{ "Label1": "Fn", "KeyCode": "Fn", "Width":1.3 },
 				{ "Label1": "Menu", "KeyCode": "Apps", "Width":1.3 },
 				{ "Label1": "Ctrl", "KeyCode": "RControlKey", "Width":1.8 },
