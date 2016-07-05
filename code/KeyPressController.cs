@@ -4,20 +4,18 @@ using System.Windows.Forms;
 
 namespace KeyboordUsage
 {
-	public class KeyPressPainter
+	public class KeyPressController
 	{
 		private string cachedKeyPopularity = "";
-		private int nextRepaint = 10;
-		private const int repaintDela = 1024;
 		private GuiKeyboard keyboard;
 
-		Func<bool> isWindowMinimized;
+		private readonly Func<bool> isWindowMinimized;
 		private readonly Action<string> updateCurrentKey;
 		private readonly Action<string> updateKeyPopularity;
 		private readonly KeysCounter counter;
 		private int keypresses = 0;
 
-		public KeyPressPainter(Func<bool> isWindowMinimized, Action<string> updateCurrentKey, Action<string> updateKeyPopularity, KeysCounter counter, GuiKeyboard keyboard)
+		public KeyPressController(Func<bool> isWindowMinimized, Action<string> updateCurrentKey, Action<string> updateKeyPopularity, KeysCounter counter, GuiKeyboard keyboard)
 		{
 			this.isWindowMinimized = isWindowMinimized;
 			this.updateCurrentKey = updateCurrentKey;
@@ -28,7 +26,8 @@ namespace KeyboordUsage
 
 		public void ForceRepaint()
 		{
-			updateKeyPopularity(GetKeyPopularity());
+			cachedKeyPopularity = GetKeyPopularity();
+			updateKeyPopularity(cachedKeyPopularity);
 
 			new HeatmapPainter(keyboard, counter).Do();
 		}
@@ -36,7 +35,6 @@ namespace KeyboordUsage
 		public void ChangeKeyboard(GuiKeyboard newKeyboard)
 		{
 			keyboard = newKeyboard;
-			updateKeyPopularity(GetKeyPopularity());
 		}
 
 		private string GetKeyPopularity()
@@ -63,14 +61,10 @@ namespace KeyboordUsage
 
 		private bool RepaintAlmostOnlyWhenVisible()
 		{
-			if (isWindowMinimized())
+			if (!isWindowMinimized())
 				return true;
 
-			if (keypresses < nextRepaint)
-				return false;
-
-			nextRepaint = keypresses + repaintDela;
-			return true;
+			return false;
 		}
 	}
 }

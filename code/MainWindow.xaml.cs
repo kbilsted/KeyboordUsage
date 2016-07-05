@@ -23,7 +23,7 @@ namespace KeyboordUsage
 		readonly KeysCounter counter;
 		UserState state;
 		readonly FileHandler fileHandler = new FileHandler(); 
-		KeyPressPainter keyPressPainter;
+		KeyPressController keyPressController;
 
 		public MainWindow()
 		{
@@ -78,15 +78,22 @@ namespace KeyboordUsage
 
 			if (listener == null)
 			{
-				keyPressPainter = new KeyPressPainter(() => WindowState == WindowState.Minimized, x => CurrentKey.Content = x, x => KeyHistory.Text = x, counter, currentSelectedHeatmap);
-				keyPressPainter.ForceRepaint();
+				keyPressController = new KeyPressController(
+					() => WindowState == WindowState.Minimized, 
+					x => CurrentKey.Content = x,
+					x => KeyHistory.Text = x, 
+					counter, 
+					currentSelectedHeatmap);
 
-				listener = new KeyboardListener(counter, keyPressPainter);
+				keyPressController.ForceRepaint();
+
+				listener = new KeyboardListener(counter, keyPressController);
 				listener.Subscribe();
 			}
 			else
 			{
-				keyPressPainter.ChangeKeyboard(currentSelectedHeatmap);
+				keyPressController.ChangeKeyboard(currentSelectedHeatmap);
+				keyPressController.ForceRepaint();
 			}
 		}
 
@@ -122,9 +129,9 @@ Made by Kasper B. Graversen 2016- ", "About...", MessageBoxButton.OK);
 
 		private void MainWindow_OnWindowStateChanged(object sender, EventArgs e)
 		{
-			if (keyPressPainter != null)
+			if (keyPressController != null)
 			{
-				keyPressPainter.ForceRepaint();
+				keyPressController.ForceRepaint();
 			}
 		}
 	}

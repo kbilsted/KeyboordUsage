@@ -8,12 +8,12 @@ namespace KeyboordUsage
 	{
 		private IKeyboardMouseEvents globalHook;
 		public readonly KeysCounter Counter;
-		readonly KeyPressPainter keyPressPainter;
+		readonly KeyPressController keyPressController;
 
-		public KeyboardListener(KeysCounter counter, KeyPressPainter keyPressPainter)
+		public KeyboardListener(KeysCounter counter, KeyPressController keyPressController)
 		{
 			this.Counter = counter;
-			this.keyPressPainter = keyPressPainter;
+			this.keyPressController = keyPressController;
 		}
 
 		public void Subscribe()
@@ -34,7 +34,7 @@ namespace KeyboordUsage
 			// det skal kun være ctrl og shift vi skal frasortere...
 
 			Counter.Add(e.KeyData);
-			keyPressPainter.Paint(e.KeyData);
+			keyPressController.Paint(e.KeyData);
 		}
 
 		private void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)
@@ -45,7 +45,7 @@ namespace KeyboordUsage
 			// if (e.Buttons == MouseButtons.Middle) { e.Handled = true; }
 		}
 
-		private void Unsubscribe()
+		public void Closing()
 		{
 			globalHook.MouseDownExt -= GlobalHookMouseDownExt;
 			globalHook.KeyUp -= RecordKeyUp;
@@ -53,11 +53,6 @@ namespace KeyboordUsage
 
 			//It is recommened to dispose it
 			globalHook.Dispose();
-		}
-
-		public void Closing()
-		{
-			Unsubscribe();
 		}
 	}
 }
