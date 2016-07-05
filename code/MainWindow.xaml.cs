@@ -77,9 +77,7 @@ namespace KeyboordUsage
 
 		private void ChangeKeyboard(int selectedIndex)
 		{
-			var newKeyboard = keyboards[selectedIndex];
-
-			var result = newKeyboard.Do();
+			var result = keyboards[selectedIndex].CreateWpfKeys();
 
 			var currentSelectedHeatmap = result.Item2;
 			Keyboard.Children.Clear();

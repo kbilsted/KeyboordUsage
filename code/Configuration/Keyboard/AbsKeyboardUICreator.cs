@@ -18,7 +18,7 @@ namespace KeyboordUsage.Configuration.Keyboard
 			this.style = style;
 		}
 
-		public abstract Tuple<StackPanel, GuiKeyboard> Do();
+		public abstract Tuple<StackPanel, GuiKeyboard> CreateWpfKeys();
 
 		protected void AddSpacer(StackPanel row, double width, double height)
 		{

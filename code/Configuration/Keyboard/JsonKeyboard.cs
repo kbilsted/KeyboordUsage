@@ -19,7 +19,7 @@ namespace KeyboordUsage.Configuration.Keyboard
 			Name = config.KeyboardName;
 		}
 
-		public override Tuple<StackPanel, GuiKeyboard> Do()
+		public override Tuple<StackPanel, GuiKeyboard> CreateWpfKeys()
 		{
 			var heatmap = new GuiKeyboard();
 
