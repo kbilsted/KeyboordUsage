@@ -57,7 +57,17 @@ namespace KeyboordUsage.Configuration
 			return
 			new DirectoryInfo(GetConfigPath()).EnumerateFiles("*.json")
 				.Select(x => new { FileName = x, Content = File.ReadAllText(x.FullName) })
-				.Select(x => new JsonKeyboard(style, x.Content, x.FileName.FullName))
+				.Select(x =>
+				{
+					try
+					{
+						return new JsonKeyboard(style, x.Content, x.FileName.FullName);
+					}
+					catch (Exception e)
+					{
+						throw new Exception("File: "+x.FileName+ " " +e.Message, e);
+					}
+				})
 				.ToArray();
 		}
 
