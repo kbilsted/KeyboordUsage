@@ -49,8 +49,7 @@ namespace KeyboordUsage
 			{
 				updateCurrentKey(keyData.ToString()); //string current = "code " + e.KeyCode + " value: " + e.KeyValue + " data: "+e.KeyData ;
 
-				if (keypresses % 2 == 0)
-					cachedKeyPopularity = GetKeyPopularity();
+				cachedKeyPopularity = GetKeyPopularity();
 
 				updateKeyPopularity(cachedKeyPopularity);
 				new HeatmapPainter(keyboard, counter).Do();
