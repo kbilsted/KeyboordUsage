@@ -16,15 +16,27 @@ namespace KeyboordUsage.Configuration
 	{
 		public UserState LoadUserState()
 		{
-			var state = UserState.LoadFromJson(GetStatePath());
-
-			var invalidJson = state == null;
-			if (invalidJson)
+			var path = GetStatePath();
+			if (File.Exists(path))
 			{
-				state= new UserState(new RecodingSession(DateTime.Now, new Dictionary<Keys, int>()), new List<RecodingSession>());
+				var json = File.ReadAllText(path);
+				var state = JsonConvert.DeserializeObject<UserState>(json);
+
+				var invalidJson = state == null;
+				if (invalidJson)
+				{
+					state = CreateDefaultState();
+				}
+
+				return state;
 			}
 
-			return state;
+			return CreateDefaultState();
+		}
+
+		private static UserState CreateDefaultState()
+		{
+			return new UserState(new RecodingSession(DateTime.Now, new Dictionary<Keys, int>()), new List<RecodingSession>(), UserState.CreateGuiConfiguration());
 		}
 
 		public void StoreUserState(UserState state)

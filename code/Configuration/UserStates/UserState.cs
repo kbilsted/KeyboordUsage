@@ -11,11 +11,12 @@ namespace KeyboordUsage.Configuration.UserStates
 		public RecodingSession accumulated;
 		public List<RecodingSession> sessions;
 		RecodingSession currentSession = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>());
+		public GuiConfiguration GuiConfiguration;
 
 		/// <summary>
 		/// called from json
 		/// </summary>
-		public UserState(RecodingSession accumulated, List<RecodingSession> sessions)
+		public UserState(RecodingSession accumulated, List<RecodingSession> sessions, GuiConfiguration guiConfiguration)
 		{
 			if (accumulated == null)
 				accumulated = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>());
@@ -25,18 +26,16 @@ namespace KeyboordUsage.Configuration.UserStates
 				sessions = new List<RecodingSession>();
 			this.sessions = sessions;
 
+			if (guiConfiguration == null)
+				guiConfiguration = CreateGuiConfiguration();
+			this.GuiConfiguration = guiConfiguration;
+
 			NewInstance();
 		}
 
-		public static UserState LoadFromJson(string path)
+		public static GuiConfiguration CreateGuiConfiguration()
 		{
-			if (File.Exists(path))
-			{
-				var json = File.ReadAllText(path);
-				return JsonConvert.DeserializeObject<UserState>(json);
-			}
-
-			return new UserState(new RecodingSession(DateTime.Now, new Dictionary<Keys, int>()), new List<RecodingSession>());
+			return new GuiConfiguration(10, 10, 1125, 550, 1);
 		}
 
 		public RecodingSession GetAccumulated()

@@ -9,6 +9,8 @@
 		Closing="Closeing"
 		Height="550" Width="1125"
 		StateChanged="MainWindow_OnWindowStateChanged"
+		SizeChanged="MainWindow_OnSizeChanged"
+		LocationChanged="MainWindow_OnLocationChanged"
 		>
 
 	<DockPanel>

@@ -21,7 +21,7 @@ namespace KeyboordUsage
 		KeyboardListener listener;
 		readonly JsonKeyboard[] keyboards;
 		readonly KeysCounter counter;
-		UserState state;
+		readonly UserState state;
 		readonly FileHandler fileHandler = new FileHandler(); 
 		KeyPressController keyPressController;
 
@@ -35,8 +35,18 @@ namespace KeyboordUsage
 			state = fileHandler.LoadUserState();
 			counter = new KeysCounter(state);
 
+			ResizeWindow(state);
+
 			KeyboardChooser.ItemsSource = keyboards.Select(x => x.Name);
-			KeyboardChooser.SelectedIndex = 0;
+			KeyboardChooser.SelectedIndex = state.GuiConfiguration.SelectedKeyboardIndex;
+		}
+
+		private void ResizeWindow(UserState state)
+		{
+			this.Width = state.GuiConfiguration.Width;
+			this.Height = state.GuiConfiguration.Height;
+			this.Top = state.GuiConfiguration.Y;
+			this.Left = state.GuiConfiguration.X;
 		}
 
 		private void Closeing(object sender, CancelEventArgs e)
@@ -95,6 +105,8 @@ namespace KeyboordUsage
 				keyPressController.ChangeKeyboard(currentSelectedHeatmap);
 				keyPressController.ForceRepaint();
 			}
+
+			state.GuiConfiguration.SelectedKeyboardIndex = selectedIndex;
 		}
 
 		private void MenuItem_ClearStatistics(object sender, RoutedEventArgs e)
@@ -133,6 +145,18 @@ Made by Kasper B. Graversen 2016- ", "About...", MessageBoxButton.OK);
 			{
 				keyPressController.ForceRepaint();
 			}
+		}
+
+		private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)
+		{
+			state.GuiConfiguration.Height = e.NewSize.Height;
+			state.GuiConfiguration.Width = e.NewSize.Width;
+		}
+
+		private void MainWindow_OnLocationChanged(object sender, EventArgs e)
+		{
+			state.GuiConfiguration.X = this.Left;
+			state.GuiConfiguration.Y = this.Top;
 		}
 	}
 }
