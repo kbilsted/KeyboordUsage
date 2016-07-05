@@ -113,6 +113,9 @@
     <Content Include="Configuration\Keyboard\QWERTY-Danish-Tenkeyless.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Configuration\Keyboard\DVORAK-US-Tenkeyless.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Configuration\Keyboard\QWERTY-UK-Tenkeyless.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
