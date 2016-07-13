@@ -12,7 +12,7 @@ Top features
 
   
 ## How to define a keyboard layout
-The application is very open to new keyboard key configurations (e.g. numeric keypad, AZERTY, COLEMAK, ...). All you need to do is to go to the folder with the `KeyboordUsage.exe` from here dig into the folder `Configuration/Keyboard`. Make a copy of any of the `.json` files and start editing. After editing simply restart the application and your new configuration has been picked up. 
+The application is very open to new keyboard key configurations (e.g. numeric keypad, AZERTY, COLEMAK, ...). All you need to do is to go to the folder with the `KeyboordUsage.exe` from here dig into the folder `Configuration/Keyboard` (browse the .json at https://github.com/kbilsted/KeyboordUsage/tree/master/code/Configuration/Keyboard). Make a copy of any of the `.json` files and start editing. After editing simply restart the application and your new configuration has been picked up. 
 
 If you make something great please share by making a pull request or opening an issue.
 
