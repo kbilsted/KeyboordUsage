@@ -86,7 +86,7 @@
 				{ "Label1": "N", "KeyCode": "N" },
 				{ "Label1": "S", "KeyCode": "S" },
 				{ "Label1": "_", "Label2" : "-", "KeyCode": "Oemtilde" },
-				{ "Label1": "Enter", "KeyCode": "Enter", "Width": 3.8 }
+				{ "Label1": "Enter", "KeyCode": "Return", "Width": 3.8 }
 			]
 		},
 		{
