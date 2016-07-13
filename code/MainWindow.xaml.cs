@@ -118,7 +118,8 @@ You can minimize CPU usage by minimizing the window when you are not looking at 
 
 You can easily define your own keyboard layouts and share them on GitHub. Just take outset in the *.json files accompanying the .exe file (the configuration folder),
 
-Backups of the keypresses are made on every program exit to your temp folder, often 'C:\Users\XXX\AppData\Local\Temp'
+Keypresses are stored in 'C:\Users\XXX\KeyboordUsage.json'. Backups are made on every program exit to the temp folder, typically 'C:\Users\XXX\AppData\Local\Temp'
+
 Made by Kasper B. Graversen 2016- ", "About...", MessageBoxButton.OK);
 		}
 
