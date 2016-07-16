@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("KeyboordUsage")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("KBG Inc.")]
 [assembly: AssemblyProduct("KeyboordUsage")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCopyright("Copyright ©  2016 Kasper B. Graversen")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
