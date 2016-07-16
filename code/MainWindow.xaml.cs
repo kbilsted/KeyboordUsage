@@ -39,6 +39,7 @@ namespace KeyboordUsage
 				x => CurrentKey.Content = x,
 				x => KeyHistory.Text = x,
 				x => ProductiveRatio.Content = x.ToString() + "%",
+				x => NavigationRatio.Content = x.ToString() + "%",
 				counter,
 				null);
 

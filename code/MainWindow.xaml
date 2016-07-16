@@ -24,20 +24,21 @@
 		</Menu>
 		<StackPanel DockPanel.Dock="Left">
 			<GroupBox Width="300" HorizontalAlignment="Left">
-				<Grid>
-					<Label>Current Key:</Label>
-					<Label Name="CurrentKey" Margin="97,0,10,0" />
-				</Grid>
+				<DockPanel>
+					<StackPanel DockPanel.Dock="Left">
+						<Label Padding="3" ToolTip="The last key pressed">Current Key:</Label>
+						<Label Padding="3" ToolTip="The ratio between producing text and deleting text">Productive ratio:</Label>
+						<Label Padding="3" ToolTip="The ratio between editing and navigating text">Navigation ratio:</Label>
+					</StackPanel>
+					<StackPanel DockPanel.Dock="Right">
+						<Label Padding="3" ToolTip="The last key pressed" Name="CurrentKey" />
+						<Label Padding="3" ToolTip="The ratio between producing text and deleting text" Name="ProductiveRatio"  />
+						<Label Padding="3" ToolTip="The ratio between editing and navigating text" Name="NavigationRatio"  />
+					</StackPanel>
+				</DockPanel>
 			</GroupBox>
 
-			<GroupBox Width="300" HorizontalAlignment="Left">
-				<Grid>
-					<Label>Productive ratio:</Label>
-					<Label Name="ProductiveRatio" Margin="97,0,10,0" />
-				</Grid>
-			</GroupBox>
-
-			<TextBox Name="KeyHistory" HorizontalAlignment="Left" Height="433" TextWrapping="Wrap" Text="" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" VerticalAlignment="Top" AcceptsReturn="True"  Width="299"  />
+			<TextBox Name="KeyHistory" HorizontalAlignment="Left" Height="425" TextWrapping="Wrap" Text="" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" VerticalAlignment="Top" AcceptsReturn="True"  Width="300"  />
 		</StackPanel>
 		<WrapPanel >
 				<Label>Keyboard:</Label> 

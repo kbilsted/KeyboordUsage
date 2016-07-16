@@ -13,13 +13,16 @@ namespace KeyboordUsage
 		private readonly Action<string> updateCurrentKey;
 		private readonly Action<string> updateKeyPopularity;
 		private readonly Action<double> updateProductiveRatio;
+		private readonly Action<double> updateNaviationRatio;
 		private readonly KeysCounter counter;
+		private string currentKey = "";
 
 		public KeyPressController(
 			Func<bool> isWindowMinimized, 
 			Action<string> updateCurrentKey, 
 			Action<string> updateKeyPopularity, 
 			Action<double> updateProductiveRatio,
+			Action<double> updateNaviationRatio,
 			KeysCounter counter, 
 			GuiKeyboard keyboard)
 		{
@@ -27,6 +30,7 @@ namespace KeyboordUsage
 			this.updateCurrentKey = updateCurrentKey;
 			this.updateKeyPopularity = updateKeyPopularity;
 			this.updateProductiveRatio = updateProductiveRatio;
+			this.updateNaviationRatio = updateNaviationRatio;
 			this.counter = counter;
 			this.keyboard = keyboard;
 		}
@@ -37,8 +41,9 @@ namespace KeyboordUsage
 			updateKeyPopularity(cachedKeyPopularity);
 
 			updateProductiveRatio(counter.GetProductiveRatio());
+			updateNaviationRatio(counter.GetNavigationRatio());
 
-			updateCurrentKey("");
+			updateCurrentKey(currentKey);
 
 			new HeatmapPainter(keyboard, counter).Do();
 		}
@@ -56,10 +61,11 @@ namespace KeyboordUsage
 
 		public void Paint(Keys keyData)
 		{
+			currentKey = keyData.ToString(); //string current = "code " + e.KeyCode + " value: " + e.KeyValue + " data: "+e.KeyData ;
+
 			if (RepaintAlmostOnlyWhenVisible())
 			{
-				updateCurrentKey(keyData.ToString()); //string current = "code " + e.KeyCode + " value: " + e.KeyValue + " data: "+e.KeyData ;
-
+				updateCurrentKey(currentKey); 
 				ForceRepaint();
 			}
 		}

@@ -39,5 +39,10 @@ namespace KeyboordUsage
 		{
 			return state.GetAccumulated().Ratios.CalculateProductiveRatio();
 		}
+
+		public double GetNavigationRatio()
+		{
+			return state.GetAccumulated().Ratios.CalculateNavigationRatio();
+		}
 	}
 }	
