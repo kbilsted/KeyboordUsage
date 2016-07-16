@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyboordUsage"
         mc:Ignorable="d"
-        Title="Keyboord usage v1.1 by Kasper B. Graversen" 
 		Closing="Closeing"
 		Height="550" Width="1125"
 		StateChanged="MainWindow_OnWindowStateChanged"

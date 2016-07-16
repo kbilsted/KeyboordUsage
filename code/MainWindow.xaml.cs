@@ -28,6 +28,8 @@ namespace KeyboordUsage
 		{
 			InitializeComponent();
 
+			Title = $"Keyboord usage v{AppConstants.CurrentVersion} by Kasper B. Graversen";
+
 			var style = (Style)FindResource("InformButton");
 			keyboards = fileHandler.GetKeyboards(style);
 
