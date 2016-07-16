@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -9,6 +10,8 @@ using System.Windows.Forms;
 using KeyboordUsage.Configuration.Keyboard;
 using KeyboordUsage.Configuration.UserStates;
 using Newtonsoft.Json;
+using Application = System.Windows.Forms.Application;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace KeyboordUsage.Configuration
 {
@@ -17,21 +20,38 @@ namespace KeyboordUsage.Configuration
 		public UserState LoadUserState()
 		{
 			var path = GetStatePath();
-			if (File.Exists(path))
+
+			if (!File.Exists(path))
+				return CreateDefaultState();
+
+			var json = File.ReadAllText(path);
+			var state = JsonConvert.DeserializeObject<UserState>(json);
+
+			var invalidJson = state == null;
+			if (invalidJson)
 			{
-				var json = File.ReadAllText(path);
-				var state = JsonConvert.DeserializeObject<UserState>(json);
-
-				var invalidJson = state == null;
-				if (invalidJson)
-				{
-					state = CreateDefaultState();
-				}
-
-				return state;
+				MessageBox.Show(null, "Configuraiton file is invalid. Resetting the settings.", "Load problems", MessageBoxButtons.OK);
+				return CreateDefaultState();
 			}
 
-			return CreateDefaultState();
+			if (state.ConfigurationVersion != AppConstants.CurrentVersion)
+			{
+				var answer = MessageBox.Show(
+					null,
+					"Old configuration format incompatible with the new format. Resetting the settings.", 
+					"Upgrade problem",
+					MessageBoxButtons.OKCancel);
+
+				if (answer == DialogResult.Cancel)
+				{
+					Application.Exit();
+					throw new Exception("User aborted.");
+				}
+
+				return CreateDefaultState();
+			}
+
+			return state;
 		}
 
 		private static UserState CreateDefaultState()
@@ -39,7 +59,7 @@ namespace KeyboordUsage.Configuration
 			var stdKeyClassConfiguration = UserState.CreateStdKeyClassConfiguration();
 			var recodingSession = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>(), new RatioCalculator());
 
-			return new UserState(recodingSession, new List<RecodingSession>(), UserState.CreateGuiConfiguration(), stdKeyClassConfiguration);
+			return new UserState(AppConstants.CurrentVersion, recodingSession, new List<RecodingSession>(), UserState.CreateGuiConfiguration(), stdKeyClassConfiguration);
 		}
 
 		public void StoreUserState(UserState state)

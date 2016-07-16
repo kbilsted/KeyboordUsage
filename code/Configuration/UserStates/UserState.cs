@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using KeyboordUsage.Configuration.Keyboard;
 
@@ -8,6 +7,9 @@ namespace KeyboordUsage.Configuration.UserStates
 {
 	public class UserState
 	{
+		/// <summary>must be public for json serialization</summary>
+		public string ConfigurationVersion;
+
 		/// <summary>must be public for json serialization</summary>
 		public RecodingSession accumulated;
 		/// <summary>must be public for json serialization</summary>
@@ -22,8 +24,10 @@ namespace KeyboordUsage.Configuration.UserStates
 		/// <summary>
 		/// called from json
 		/// </summary>
-		public UserState(RecodingSession accumulated, List<RecodingSession> pastSessions, GuiConfiguration guiConfiguration, KeyClassConfiguration keyclasses)
+		public UserState(string configurationVersion, RecodingSession accumulated, List<RecodingSession> pastSessions, GuiConfiguration guiConfiguration, KeyClassConfiguration keyclasses)
 		{
+			ConfigurationVersion = configurationVersion;
+
 			if (keyclasses == null)
 				keyclasses = CreateStdKeyClassConfiguration();
 			KeyClasses = keyclasses;
