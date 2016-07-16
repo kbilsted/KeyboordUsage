@@ -46,9 +46,14 @@ namespace KeyboordUsage.Configuration
 		{
 			if (File.Exists(GetStatePath()))
 			{
-				var tempFileName = Path.GetTempFileName();
-				File.Delete(tempFileName);
-				File.Move(GetStatePath(), tempFileName+".KeyboordUsage.bak");
+				try
+				{
+					var backupPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".KeyboordUsage.bak");
+					File.Move(GetStatePath(), backupPath);
+				}
+				catch (Exception)
+				{
+				}
 			}
 
 			var stateJson = JsonConvert.SerializeObject(state, Formatting.Indented);

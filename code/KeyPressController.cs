@@ -35,7 +35,10 @@ namespace KeyboordUsage
 		{
 			cachedKeyPopularity = GetKeyPopularity();
 			updateKeyPopularity(cachedKeyPopularity);
+
 			updateProductiveRatio(counter.GetProductiveRatio());
+
+			updateCurrentKey("");
 
 			new HeatmapPainter(keyboard, counter).Do();
 		}
