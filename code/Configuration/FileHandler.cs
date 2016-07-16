@@ -36,7 +36,10 @@ namespace KeyboordUsage.Configuration
 
 		private static UserState CreateDefaultState()
 		{
-			return new UserState(new RecodingSession(DateTime.Now, new Dictionary<Keys, int>()), new List<RecodingSession>(), UserState.CreateGuiConfiguration());
+			var stdKeyClassConfiguration = UserState.CreateStdKeyClassConfiguration();
+			var recodingSession = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>(), new RatioCalculator());
+
+			return new UserState(recodingSession, new List<RecodingSession>(), UserState.CreateGuiConfiguration(), stdKeyClassConfiguration);
 		}
 
 		public void StoreUserState(UserState state)

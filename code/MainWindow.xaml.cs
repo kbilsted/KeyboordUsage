@@ -38,6 +38,7 @@ namespace KeyboordUsage
 				() => WindowState == WindowState.Minimized,
 				x => CurrentKey.Content = x,
 				x => KeyHistory.Text = x,
+				x => ProductiveRatio.Content = x.ToString() + "%",
 				counter,
 				null);
 
@@ -48,6 +49,8 @@ namespace KeyboordUsage
 
 			KeyboardChooser.ItemsSource = keyboards.Select(x => x.Name);
 			KeyboardChooser.SelectedIndex = state.GuiConfiguration.SelectedKeyboardIndex;
+
+			keyPressController.ForceRepaint();
 		}
 
 		private void ResizeWindow(UserState state)

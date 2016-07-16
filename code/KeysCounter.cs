@@ -16,8 +16,8 @@ namespace KeyboordUsage
 
 		public void Add(Keys key)
 		{
-			state.GetAccumulated().Add(key);
-			state.GetCurrentSession().Add(key);
+			state.GetAccumulated().Add(key, state.KeyClasses);
+			state.GetCurrentSession().Add(key, state.KeyClasses);
 		}
 
 		public Dictionary<Keys, int> GetRecords()
@@ -33,6 +33,11 @@ namespace KeyboordUsage
 		public IEnumerable<KeyValuePair<Keys, int>> GetAccumulatedKeyPopularity()
 		{
 			return GetRecords().OrderByDescending(x => x.Value);
+		}
+
+		public double GetProductiveRatio()
+		{
+			return state.GetAccumulated().Ratios.CalculateProductiveRatio();
 		}
 	}
 }	

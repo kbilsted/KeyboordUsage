@@ -59,12 +59,8 @@ namespace KeyboordUsage
 			}
 		}
 
-		static Color CreateHeatColor(int value, decimal max)
+		public Color CreateHeatColor(decimal pct)
 		{
-			if (max == 0)
-				max = 1M;
-			decimal pct = value/max;
-
 			var color = new Color();
 			color.A = 255;
 
@@ -77,7 +73,16 @@ namespace KeyboordUsage
 			if (pct < 0.67M)
 				return Color.FromArgb(0xFF, 0xFF, (byte)(255 * Math.Min(3 * (pct - 0.333333M), 1M)), 0);
 
-			return Color.FromArgb(0xFF, (byte)(255 * Math.Min(3 * (1M - pct), 1M)), 0xFF,  0);
+			return Color.FromArgb(0xFF, (byte)(255 * Math.Min(3 * (1M - pct), 1M)), 0xFF, 0);
+		}
+
+		private Color CreateHeatColor(int value, decimal max)
+		{
+			if (max == 0)
+				max = 1M;
+			decimal pct = value/max;
+
+			return CreateHeatColor(pct);
 		}
 	}
 }

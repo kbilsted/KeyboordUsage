@@ -12,14 +12,21 @@ namespace KeyboordUsage
 		private readonly Func<bool> isWindowMinimized;
 		private readonly Action<string> updateCurrentKey;
 		private readonly Action<string> updateKeyPopularity;
+		private readonly Action<double> updateProductiveRatio;
 		private readonly KeysCounter counter;
-		private int keypresses = 0;
 
-		public KeyPressController(Func<bool> isWindowMinimized, Action<string> updateCurrentKey, Action<string> updateKeyPopularity, KeysCounter counter, GuiKeyboard keyboard)
+		public KeyPressController(
+			Func<bool> isWindowMinimized, 
+			Action<string> updateCurrentKey, 
+			Action<string> updateKeyPopularity, 
+			Action<double> updateProductiveRatio,
+			KeysCounter counter, 
+			GuiKeyboard keyboard)
 		{
 			this.isWindowMinimized = isWindowMinimized;
 			this.updateCurrentKey = updateCurrentKey;
 			this.updateKeyPopularity = updateKeyPopularity;
+			this.updateProductiveRatio = updateProductiveRatio;
 			this.counter = counter;
 			this.keyboard = keyboard;
 		}
@@ -28,6 +35,7 @@ namespace KeyboordUsage
 		{
 			cachedKeyPopularity = GetKeyPopularity();
 			updateKeyPopularity(cachedKeyPopularity);
+			updateProductiveRatio(counter.GetProductiveRatio());
 
 			new HeatmapPainter(keyboard, counter).Do();
 		}
@@ -49,13 +57,8 @@ namespace KeyboordUsage
 			{
 				updateCurrentKey(keyData.ToString()); //string current = "code " + e.KeyCode + " value: " + e.KeyValue + " data: "+e.KeyData ;
 
-				cachedKeyPopularity = GetKeyPopularity();
-
-				updateKeyPopularity(cachedKeyPopularity);
-				new HeatmapPainter(keyboard, counter).Do();
+				ForceRepaint();
 			}
-			
-			keypresses++;
 		}
 
 		private bool RepaintAlmostOnlyWhenVisible()

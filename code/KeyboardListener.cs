@@ -34,6 +34,7 @@ namespace KeyboordUsage
 			// det skal kun være ctrl og shift vi skal frasortere...
 
 			Counter.Add(e.KeyData);
+
 			keyPressController.Paint(e.KeyData);
 		}
 

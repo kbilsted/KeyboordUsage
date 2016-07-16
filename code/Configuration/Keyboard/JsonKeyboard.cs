@@ -47,24 +47,13 @@ namespace KeyboordUsage.Configuration.Keyboard
 					{
 						var button = CreateButton(key.Width*NormalWidth, NormalHeight, key.Label1, key.Label2, key.Label3, key.Label4);
 
-						var keyCodes = stdcodes.Select(x => key.KeyCode + ", " + x).Concat(new[] { key.KeyCode }).ToArray();
-						AddKey(heatmap, uiRow, button, keyCodes );
+						var keyCodes = KeyboardConstants.CombineKeysWithStandardModifiers(new [] {key.KeyCode}).ToArray();
+						AddKey(heatmap, uiRow, button, keyCodes);
 					}
 				}
 			}
 
 			return Tuple.Create(keyboard, heatmap);
 		}
-
-		string[] stdcodes =
-		{
-			"Shift",
-			"Control",
-			"Alt",
-			"Control, Alt",
-			"Shift, Control",
-			"Shift, Control, Alt",
-			"Shift, Alt"
-		};
 	}
 }

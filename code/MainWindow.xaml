@@ -26,11 +26,18 @@
 			<GroupBox Width="300" HorizontalAlignment="Left">
 				<Grid>
 					<Label>Current Key:</Label>
-					<Label Name="CurrentKey" Margin="74,0,10,0" />
+					<Label Name="CurrentKey" Margin="97,0,10,0" />
 				</Grid>
 			</GroupBox>
 
-			<TextBox Name="KeyHistory" HorizontalAlignment="Left" Height="463" TextWrapping="Wrap" Text="" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" VerticalAlignment="Top" AcceptsReturn="True"  Width="299"  />
+			<GroupBox Width="300" HorizontalAlignment="Left">
+				<Grid>
+					<Label>Productive ratio:</Label>
+					<Label Name="ProductiveRatio" Margin="97,0,10,0" />
+				</Grid>
+			</GroupBox>
+
+			<TextBox Name="KeyHistory" HorizontalAlignment="Left" Height="433" TextWrapping="Wrap" Text="" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" VerticalAlignment="Top" AcceptsReturn="True"  Width="299"  />
 		</StackPanel>
 		<WrapPanel >
 				<Label>Keyboard:</Label> 
