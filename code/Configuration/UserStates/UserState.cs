@@ -11,7 +11,7 @@ namespace KeyboordUsage.Configuration.UserStates
 		/// <summary>must be public for json serialization</summary>
 		public RecodingSession accumulated;
 		/// <summary>must be public for json serialization</summary>
-		public readonly List<RecodingSession> sessions; // tODO rename to PastSessions
+		public readonly List<RecodingSession> pastSessions;
 
 		public readonly GuiConfiguration GuiConfiguration;
 
@@ -22,7 +22,7 @@ namespace KeyboordUsage.Configuration.UserStates
 		/// <summary>
 		/// called from json
 		/// </summary>
-		public UserState(RecodingSession accumulated, List<RecodingSession> sessions, GuiConfiguration guiConfiguration, KeyClassConfiguration keyclasses)
+		public UserState(RecodingSession accumulated, List<RecodingSession> pastSessions, GuiConfiguration guiConfiguration, KeyClassConfiguration keyclasses)
 		{
 			if (keyclasses == null)
 				keyclasses = CreateStdKeyClassConfiguration();
@@ -32,9 +32,9 @@ namespace KeyboordUsage.Configuration.UserStates
 				accumulated = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>(), new RatioCalculator());
 			this.accumulated = accumulated;
 
-			if (sessions == null)
-				sessions = new List<RecodingSession>();
-			this.sessions = sessions;
+			if (pastSessions == null)
+				pastSessions = new List<RecodingSession>();
+			this.pastSessions = pastSessions;
 
 			if (guiConfiguration == null)
 				guiConfiguration = CreateGuiConfiguration();
@@ -99,14 +99,14 @@ namespace KeyboordUsage.Configuration.UserStates
 		public void Clear()
 		{
 			accumulated = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>(), new RatioCalculator());
-			sessions.Clear();
+			pastSessions.Clear();
 			NewInstance();
 		}
 
 		private void NewInstance()
 		{
 			currentSession = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>(), new RatioCalculator());
-			sessions.Add(currentSession);
+			pastSessions.Add(currentSession);
 		}
 	}
 }
