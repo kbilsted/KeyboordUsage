@@ -5,7 +5,18 @@ using KeyboordUsage.Configuration.Keyboard;
 
 namespace KeyboordUsage.Configuration.UserStates
 {
-	public class UserState
+	public interface IUserState
+	{
+		RecodingSession GetAccumulated();
+		RecodingSession GetCurrentSession();
+		void Clear();
+		void NewSession();
+		KeyClassConfiguration GetKeyClasses();
+		GuiConfiguration GetGuiConfiguration();
+	}
+
+
+	public class UserState : IUserState
 	{
 		/// <summary>must be public for json serialization</summary>
 		public string ConfigurationVersion;
@@ -114,6 +125,16 @@ namespace KeyboordUsage.Configuration.UserStates
 			currentSession = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>(), new RatioCalculator());
 
 			pastSessions.Add(currentSession);
+		}
+
+		public KeyClassConfiguration GetKeyClasses()
+		{
+			return KeyClasses;
+		}
+
+		public GuiConfiguration GetGuiConfiguration()
+		{
+			return GuiConfiguration;
 		}
 	}
 }

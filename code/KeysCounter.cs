@@ -7,17 +7,17 @@ namespace KeyboordUsage
 {
 	public class KeysCounter
 	{
-		private readonly UserState state;
+		private readonly IUserState state;
 
-		public KeysCounter(UserState state)
+		public KeysCounter(IUserState state)
 		{
 			this.state = state;
 		}
 
 		public void Add(Keys key)
 		{
-			state.GetAccumulated().Add(key, state.KeyClasses);
-			state.GetCurrentSession().Add(key, state.KeyClasses);
+			state.GetAccumulated().Add(key, state.GetKeyClasses());
+			state.GetCurrentSession().Add(key, state.GetKeyClasses());
 		}
 
 		public Dictionary<Keys, int> GetRecords()

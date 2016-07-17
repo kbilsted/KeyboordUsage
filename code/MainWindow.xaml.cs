@@ -30,7 +30,8 @@ namespace KeyboordUsage
 			keyboards = configurationRepository.GetKeyboards(style);
 
 			state = configurationRepository.LoadUserState();
-			var counter = new KeysCounter(state);
+			var userState = new DailySessionDecorator(state);
+			var counter = new KeysCounter(userState);
 
 			keyPressController = new KeyPressController(
 				() => WindowState == WindowState.Minimized,
@@ -47,17 +48,19 @@ namespace KeyboordUsage
 			ResizeWindow(state);
 
 			KeyboardChooser.ItemsSource = keyboards.Select(x => x.Name);
-			KeyboardChooser.SelectedIndex = state.GuiConfiguration.SelectedKeyboardIndex;
+			KeyboardChooser.SelectedIndex = state.GetGuiConfiguration().SelectedKeyboardIndex;
 
 			keyPressController.ForceRepaint();
 		}
 
-		private void ResizeWindow(UserState state)
+		private void ResizeWindow(IUserState state)
 		{
-			this.Width = state.GuiConfiguration.Width;
-			this.Height = state.GuiConfiguration.Height;
-			this.Top = state.GuiConfiguration.Y;
-			this.Left = state.GuiConfiguration.X;
+			var guiConfiguration = state.GetGuiConfiguration();
+
+			this.Width = guiConfiguration.Width;
+			this.Height = guiConfiguration.Height;
+			this.Top = guiConfiguration.Y;
+			this.Left = guiConfiguration.X;
 		}
 
 		private void Closeing(object sender, CancelEventArgs e)
