@@ -84,6 +84,7 @@
     <Compile Include="Configuration\UserStates\RatioCalculator.cs" />
     <Compile Include="Configuration\UserStates\RecodingSession.cs" />
     <Compile Include="Configuration\UserStates\UserState.cs" />
+    <Compile Include="Configuration\UserStates\UserStateStandardConfiguraion.cs" />
     <Compile Include="ExceptionShower.cs" />
     <Compile Include="GuiKeyboard.cs" />
     <Compile Include="HeatmapPainter.cs" />

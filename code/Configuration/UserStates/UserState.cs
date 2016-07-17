@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using KeyboordUsage.Configuration.Keyboard;
 
 namespace KeyboordUsage.Configuration.UserStates
 {
@@ -23,6 +22,7 @@ namespace KeyboordUsage.Configuration.UserStates
 
 		/// <summary>must be public for json serialization</summary>
 		public RecodingSession accumulated;
+
 		/// <summary>must be public for json serialization</summary>
 		public readonly List<RecodingSession> pastSessions;
 
@@ -40,7 +40,7 @@ namespace KeyboordUsage.Configuration.UserStates
 			ConfigurationVersion = configurationVersion;
 
 			if (keyclasses == null)
-				keyclasses = CreateStdKeyClassConfiguration();
+				keyclasses = UserStateStandardConfiguraion.CreateStdKeyClassConfiguration();
 			KeyClasses = keyclasses;
 
 			if (accumulated == null)
@@ -52,53 +52,10 @@ namespace KeyboordUsage.Configuration.UserStates
 			this.pastSessions = pastSessions;
 
 			if (guiConfiguration == null)
-				guiConfiguration = CreateGuiConfiguration();
+				guiConfiguration = UserStateStandardConfiguraion.CreateGuiConfiguration();
 			GuiConfiguration = guiConfiguration;
 
 			NewSession();
-		}
-
-		public static GuiConfiguration CreateGuiConfiguration()
-		{
-			return new GuiConfiguration(10, 10, 1125, 550, 1);
-		}
-
-		public static KeyClassConfiguration CreateStdKeyClassConfiguration()
-		{
-			var destructionKeys = KeyboardConstants.CombineKeysWithStandardModifiers(new [] { "Back", "Delete" });
-			var navKeys = KeyboardConstants.CombineKeysWithStandardModifiers(new[] { "Home", "PageUp", "End", "Next", "Up", "Left", "Down", "Right" });
-
-			var metaKeys = new [] 
-			{
-				"Escape",
-				"F1",
-				"F2",
-				"F3",
-				"F4",
-				"F5",
-				"F6",
-				"F7",
-				"F8",
-				"F9",
-				"F10",
-				"F11",
-				"F12",
-				"LControlKey",
-				"RLControlKey",
-				"LWin",
-				"LMenu",
-				"RMenu",
-				"Fn",
-				"Apps"
-			};
-			var meta = KeyboardConstants.CombineKeysWithStandardModifiers(metaKeys);
-
-			return new KeyClassConfiguration()
-			{
-				DestructiveKeyData = destructionKeys,
-				MetaKeyData = meta,
-				NaviationKeyData = navKeys,
-			};
 		}
 
 		public RecodingSession GetAccumulated()

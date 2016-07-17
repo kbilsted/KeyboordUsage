@@ -21,7 +21,7 @@ namespace KeyboordUsage.Configuration
 			var path = GetStatePath();
 
 			if (!File.Exists(path))
-				return CreateDefaultState();
+				return UserStateStandardConfiguraion.CreateDefaultState();
 
 			var json = File.ReadAllText(path);
 			var state = JsonConvert.DeserializeObject<UserState>(json);
@@ -30,7 +30,7 @@ namespace KeyboordUsage.Configuration
 			if (invalidJson)
 			{
 				MessageBox.Show(null, "Configuraiton file is invalid. Resetting the settings.", "Load problems", MessageBoxButtons.OK);
-				return CreateDefaultState();
+				return UserStateStandardConfiguraion.CreateDefaultState();
 			}
 
 			if (state.ConfigurationVersion != AppConstants.CurrentVersion)
@@ -47,18 +47,10 @@ namespace KeyboordUsage.Configuration
 					throw new Exception("User aborted.");
 				}
 
-				return CreateDefaultState();
+				return UserStateStandardConfiguraion.CreateDefaultState();
 			}
 
 			return state;
-		}
-
-		private static UserState CreateDefaultState()
-		{
-			var stdKeyClassConfiguration = UserState.CreateStdKeyClassConfiguration();
-			var recodingSession = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>(), new RatioCalculator());
-
-			return new UserState(AppConstants.CurrentVersion, recodingSession, new List<RecodingSession>(), UserState.CreateGuiConfiguration(), stdKeyClassConfiguration);
 		}
 
 		public void StoreUserState(UserState state)
