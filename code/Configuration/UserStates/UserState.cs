@@ -44,7 +44,7 @@ namespace KeyboordUsage.Configuration.UserStates
 				guiConfiguration = CreateGuiConfiguration();
 			GuiConfiguration = guiConfiguration;
 
-			NewInstance();
+			NewSession();
 		}
 
 		public static GuiConfiguration CreateGuiConfiguration()
@@ -103,13 +103,16 @@ namespace KeyboordUsage.Configuration.UserStates
 		public void Clear()
 		{
 			accumulated = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>(), new RatioCalculator());
+
 			pastSessions.Clear();
-			NewInstance();
+
+			NewSession();
 		}
 
-		private void NewInstance()
+		public void NewSession()
 		{
 			currentSession = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>(), new RatioCalculator());
+
 			pastSessions.Add(currentSession);
 		}
 	}

@@ -52,7 +52,6 @@ namespace KeyboordUsage
 			globalHook.KeyUp -= RecordKeyUp;
 			//globalHook.KeyDown -= RecordDown;
 
-			//It is recommened to dispose it
 			globalHook.Dispose();
 		}
 	}
