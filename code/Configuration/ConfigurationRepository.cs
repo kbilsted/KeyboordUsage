@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,7 +14,7 @@ using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace KeyboordUsage.Configuration
 {
-	class FileHandler
+	class ConfigurationRepository
 	{
 		public UserState LoadUserState()
 		{

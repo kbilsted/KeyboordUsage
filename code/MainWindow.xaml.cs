@@ -21,7 +21,7 @@ namespace KeyboordUsage
 		readonly KeyboardListener listener;
 		readonly JsonKeyboard[] keyboards;
 		readonly UserState state;
-		readonly FileHandler fileHandler = new FileHandler(); 
+		readonly ConfigurationRepository configurationRepository = new ConfigurationRepository(); 
 		readonly KeyPressController keyPressController;
 
 		public MainWindow()
@@ -31,9 +31,9 @@ namespace KeyboordUsage
 			Title = $"Keyboord usage v{AppConstants.CurrentVersion} by Kasper B. Graversen";
 
 			var style = (Style)FindResource("InformButton");
-			keyboards = fileHandler.GetKeyboards(style);
+			keyboards = configurationRepository.GetKeyboards(style);
 
-			state = fileHandler.LoadUserState();
+			state = configurationRepository.LoadUserState();
 			var counter = new KeysCounter(state);
 
 			keyPressController = new KeyPressController(
@@ -68,7 +68,7 @@ namespace KeyboordUsage
 		{
 			try
 			{
-				fileHandler.StoreUserState(state);
+				configurationRepository.StoreUserState(state);
 				listener.Closing();
 			}
 			catch (Exception ex)
