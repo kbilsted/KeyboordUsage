@@ -16,8 +16,10 @@ namespace KeyboordUsage
 
 		public void Add(Keys key)
 		{
-			state.GetAccumulated().Add(key, state.GetKeyClasses());
-			state.GetCurrentSession().Add(key, state.GetKeyClasses());
+			var keyClassConfiguration = state.GetKeyClasses();
+
+			state.GetAccumulated().Add(key, keyClassConfiguration);
+			state.GetCurrentSession().Add(key, keyClassConfiguration);
 		}
 
 		public Dictionary<Keys, int> GetRecords()
