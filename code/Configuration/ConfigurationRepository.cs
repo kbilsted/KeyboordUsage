@@ -59,7 +59,7 @@ namespace KeyboordUsage.Configuration
 			{
 				try
 				{
-					var backupPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".KeyboordUsage.bak");
+					var backupPath = Path.Combine(Path.GetTempPath(), "KeyboordUsage." + Guid.NewGuid() + ".bak");
 					File.Move(GetStatePath(), backupPath);
 				}
 				catch (Exception)
