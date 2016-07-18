@@ -6,13 +6,13 @@ namespace KeyboordUsage.Configuration.UserStates
 {
 	public class RecodingSession
 	{
-		public DateTime UpToTime;
+		public DateTime FromTime;
 		public readonly Dictionary<Keys, int> Records;
 		public readonly RatioCalculator Ratios;
 
-		public RecodingSession(DateTime upToTime, Dictionary<Keys, int> records, RatioCalculator ratios)
+		public RecodingSession(DateTime fromTime, Dictionary<Keys, int> records, RatioCalculator ratios)
 		{
-			UpToTime = upToTime;
+			FromTime = fromTime;
 			Records = records;
 			Ratios = ratios;
 		}
