@@ -20,15 +20,7 @@ namespace KeyboordUsage
 
 		public void Do()
 		{
-			var sumButtons = new Dictionary<Button, int>();
-			foreach (var kv in keyboard.Button2Keydata)
-			{
-				var sumButton = counter.GetRecords()
-					.Where(x => kv.Value.Contains(x.Key.ToString()))
-					.Sum(x => x.Value);
-				sumButtons.Add(kv.Key, sumButton);
-			}
-
+			var sumButtons = CalculateSumOfButtons();
 			var max = sumButtons.Select(x => x.Value).Max();
 
 			foreach (Button button in keyboard.Button2Keydata.Keys)
@@ -57,6 +49,25 @@ namespace KeyboordUsage
 					}
 				};
 			}
+		}
+
+		private Dictionary<Button, int> CalculateSumOfButtons()
+		{
+			var sumButtons = new Dictionary<Button, int>();
+
+			var records = counter.GetRecords()
+				.Select(x => new { Keycode = x.Key.ToString(), Count = x.Value })
+				.ToArray();
+
+			foreach (var kv in keyboard.Button2Keydata)
+			{
+				var sumButton = records
+					.Where(x => kv.Value.Contains(x.Keycode))
+					.Sum(x => x.Count);
+				sumButtons.Add(kv.Key, sumButton);
+			}
+
+			return sumButtons;
 		}
 
 		public Color CreateHeatColor(decimal pct)
