@@ -67,7 +67,7 @@ namespace KeyboordUsage
 		{
 			try
 			{
-				configurationRepository.StoreUserState(state);
+				configurationRepository.BackupOldAndStoreNewUserState(state);
 				listener.Closing();
 			}
 			catch (Exception ex)
@@ -104,11 +104,13 @@ namespace KeyboordUsage
 
 		private void MenuItem_ClearStatistics(object sender, RoutedEventArgs e)
 		{
-			var answer = MessageBox.Show(this, "Are you sure you want to loose all changes?", "Clear recorded statistics",
-				MessageBoxButton.YesNo);
+			var answer = MessageBox.Show(this, "Are you sure you want to clear all statistics? A backup is made in your temp folder.", "Clear recorded statistics", MessageBoxButton.YesNo);
 
 			if (answer == MessageBoxResult.Yes)
 			{
+				configurationRepository.StoreUserState(state);
+				configurationRepository.BackupOldState();
+
 				listener.Counter.Clear();
 				ChangeKeyboard(KeyboardChooser.SelectedIndex);
 			}

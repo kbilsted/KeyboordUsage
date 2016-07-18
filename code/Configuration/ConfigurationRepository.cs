@@ -29,7 +29,8 @@ namespace KeyboordUsage.Configuration
 			var invalidJson = state == null;
 			if (invalidJson)
 			{
-				MessageBox.Show(null, "Configuraiton file is invalid. Resetting the settings.", "Load problems", MessageBoxButtons.OK);
+				MessageBox.Show(null, "Configuraiton file is invalid. Resetting the settings. A backup of the old configuration file is made in your temp-folder.", "Load problems", MessageBoxButtons.OK);
+				BackupOldState();
 				return UserStateStandardConfiguraion.CreateDefaultState();
 			}
 
@@ -37,7 +38,7 @@ namespace KeyboordUsage.Configuration
 			{
 				var answer = MessageBox.Show(
 					null,
-					"Old configuration format incompatible with the new format. Resetting the settings.", 
+					"The existing configuration file is incompatible with the new version. Reset the settings? A backup of the old configuration file is made in your temp-folder", 
 					"Upgrade problem",
 					MessageBoxButtons.OKCancel);
 
@@ -47,13 +48,26 @@ namespace KeyboordUsage.Configuration
 					throw new Exception("User aborted.");
 				}
 
+				BackupOldState();
 				return UserStateStandardConfiguraion.CreateDefaultState();
 			}
 
 			return state;
 		}
 
+		public void BackupOldAndStoreNewUserState(UserState state)
+		{
+			BackupOldState();
+			StoreUserState(state);
+		}
+
 		public void StoreUserState(UserState state)
+		{
+			var stateJson = JsonConvert.SerializeObject(state, Formatting.Indented);
+			File.WriteAllText(GetStatePath(), stateJson, Encoding.UTF8);
+		}
+
+		public void BackupOldState()
 		{
 			if (File.Exists(GetStatePath()))
 			{
@@ -62,13 +76,11 @@ namespace KeyboordUsage.Configuration
 					var backupPath = Path.Combine(Path.GetTempPath(), "KeyboordUsage." + Guid.NewGuid() + ".bak");
 					File.Move(GetStatePath(), backupPath);
 				}
-				catch (Exception)
+				catch (Exception e)
 				{
+					ExceptionShower.Do(e, null);
 				}
 			}
-
-			var stateJson = JsonConvert.SerializeObject(state, Formatting.Indented);
-			File.WriteAllText(GetStatePath(), stateJson, Encoding.UTF8);
 		}
 
 		public JsonKeyboard[] GetKeyboards(Style style)
