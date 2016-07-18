@@ -91,6 +91,13 @@ namespace KeyboordUsage
 
 		private void ChangeKeyboard(int selectedIndex)
 		{
+			// can happen eg when using the app, closing, deleting keyboard.json files and restarting
+			if (selectedIndex < 0 || selectedIndex > keyboards.Length - 1)
+			{
+				MessageBox.Show(this, "Invalid keyboard selection. Using the first in the list", "error", MessageBoxButton.OK);
+				selectedIndex = 0;
+			}
+
 			var result = keyboards[selectedIndex].CreateWpfKeys();
 
 			Keyboard.Children.Clear();
@@ -112,7 +119,7 @@ namespace KeyboordUsage
 				configurationRepository.BackupOldState();
 
 				listener.Counter.Clear();
-				ChangeKeyboard(KeyboardChooser.SelectedIndex);
+				keyPressController.ForceRepaint();
 			}
 		}
 
