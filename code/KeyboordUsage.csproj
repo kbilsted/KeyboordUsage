@@ -85,9 +85,9 @@
     <Compile Include="Configuration\UserStates\RecodingSession.cs" />
     <Compile Include="Configuration\UserStates\UserState.cs" />
     <Compile Include="Configuration\UserStates\UserStateStandardConfiguraion.cs" />
-    <Compile Include="ExceptionShower.cs" />
-    <Compile Include="GuiKeyboard.cs" />
-    <Compile Include="HeatmapPainter.cs" />
+    <Compile Include="Gui\ExceptionShower.cs" />
+    <Compile Include="Gui\GuiKeyboard.cs" />
+    <Compile Include="Gui\HeatmapPainter.cs" />
     <Compile Include="KeyboardListener.cs" />
     <Compile Include="Configuration\Keyboard\AbsKeyboardUICreator.cs" />
     <Compile Include="KeysCounter.cs" />

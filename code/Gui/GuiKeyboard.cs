@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 
-namespace KeyboordUsage
+namespace KeyboordUsage.Gui
 {
 	public class GuiKeyboard
 	{

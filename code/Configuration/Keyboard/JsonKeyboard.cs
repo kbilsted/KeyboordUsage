@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using KeyboordUsage.Gui;
 using Newtonsoft.Json;
 
 namespace KeyboordUsage.Configuration.Keyboard

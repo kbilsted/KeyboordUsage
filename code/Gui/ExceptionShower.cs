@@ -1,7 +1,7 @@
 using System;
 using System.Windows;
 
-namespace KeyboordUsage
+namespace KeyboordUsage.Gui
 {
 	static class ExceptionShower
 	{

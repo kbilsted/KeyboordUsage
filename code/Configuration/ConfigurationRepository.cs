@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Forms;
 using KeyboordUsage.Configuration.Keyboard;
 using KeyboordUsage.Configuration.UserStates;
+using KeyboordUsage.Gui;
 using Newtonsoft.Json;
 using Application = System.Windows.Forms.Application;
 using MessageBox = System.Windows.Forms.MessageBox;

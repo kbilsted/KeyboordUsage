@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using KeyboordUsage.Configuration;
 using KeyboordUsage.Configuration.Keyboard;
 using KeyboordUsage.Configuration.UserStates;
+using KeyboordUsage.Gui;
 
 namespace KeyboordUsage
 {
