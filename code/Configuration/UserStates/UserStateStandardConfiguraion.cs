@@ -5,22 +5,22 @@ using KeyboordUsage.Configuration.Keyboard;
 
 namespace KeyboordUsage.Configuration.UserStates
 {
-	static class UserStateStandardConfiguraion
+	class UserStateStandardConfiguraion
 	{
-		public static UserState CreateDefaultState()
+		public UserState CreateDefaultState()
 		{
 			var stdKeyClassConfiguration = CreateStdKeyClassConfiguration();
 			var recodingSession = new RecodingSession(DateTime.Now, new Dictionary<Keys, int>(), new RatioCalculator());
 
-			return new UserState(AppConstants.CurrentVersion, recodingSession, new List<RecodingSession>(), UserStateStandardConfiguraion.CreateGuiConfiguration(), stdKeyClassConfiguration);
+			return new UserState(AppConstants.CurrentVersion, recodingSession, new List<RecodingSession>(), CreateGuiConfiguration(), stdKeyClassConfiguration);
 		}
 
-		public static GuiConfiguration CreateGuiConfiguration()
+		public GuiConfiguration CreateGuiConfiguration()
 		{
 			return new GuiConfiguration(10, 10, 1125, 550, 1);
 		}
 
-		public static KeyClassConfiguration CreateStdKeyClassConfiguration()
+		public KeyClassConfiguration CreateStdKeyClassConfiguration()
 		{
 			var destructionKeys = KeyboardConstants.CombineKeysWithStandardModifiers(new[] { "Back", "Delete" });
 			var navKeys = KeyboardConstants.CombineKeysWithStandardModifiers(new[] { "Home", "PageUp", "End", "Next", "Up", "Left", "Down", "Right" });

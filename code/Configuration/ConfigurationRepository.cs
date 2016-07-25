@@ -16,12 +16,19 @@ namespace KeyboordUsage.Configuration
 {
 	class ConfigurationRepository
 	{
+		private UserStateStandardConfiguraion standardConfiguraion;
+
+		public ConfigurationRepository(UserStateStandardConfiguraion standardConfiguraion)
+		{
+			this.standardConfiguraion = standardConfiguraion;
+		}
+
 		public UserState LoadUserState()
 		{
 			var path = GetStatePath();
 
 			if (!File.Exists(path))
-				return UserStateStandardConfiguraion.CreateDefaultState();
+				return standardConfiguraion.CreateDefaultState();
 
 			var json = File.ReadAllText(path);
 			var state = JsonConvert.DeserializeObject<UserState>(json);
@@ -31,7 +38,7 @@ namespace KeyboordUsage.Configuration
 			{
 				MessageBox.Show(null, "Configuraiton file is invalid. Resetting the settings. A backup of the old configuration file is made in your temp-folder.", "Load problems", MessageBoxButtons.OK);
 				BackupOldState();
-				return UserStateStandardConfiguraion.CreateDefaultState();
+				return standardConfiguraion.CreateDefaultState();
 			}
 
 			if (!AppConstants.CompatibleFileFormatVersions.Contains(state.ConfigurationVersion))
@@ -49,7 +56,7 @@ namespace KeyboordUsage.Configuration
 				}
 
 				BackupOldState();
-				return UserStateStandardConfiguraion.CreateDefaultState();
+				return standardConfiguraion.CreateDefaultState();
 			}
 
 			return state;

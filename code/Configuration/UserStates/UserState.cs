@@ -38,9 +38,12 @@ namespace KeyboordUsage.Configuration.UserStates
 		public UserState(string configurationVersion, RecodingSession accumulated, List<RecodingSession> pastSessions, GuiConfiguration guiConfiguration, KeyClassConfiguration keyclasses)
 		{
 			ConfigurationVersion = configurationVersion;
+			var standardConfiguraion = new UserStateStandardConfiguraion();
 
 			if (keyclasses == null)
-				keyclasses = UserStateStandardConfiguraion.CreateStdKeyClassConfiguration();
+			{
+				keyclasses = standardConfiguraion.CreateStdKeyClassConfiguration();
+			}
 			KeyClasses = keyclasses;
 
 			if (accumulated == null)
@@ -52,7 +55,7 @@ namespace KeyboordUsage.Configuration.UserStates
 			this.pastSessions = pastSessions;
 
 			if (guiConfiguration == null)
-				guiConfiguration = UserStateStandardConfiguraion.CreateGuiConfiguration();
+				guiConfiguration = standardConfiguraion.CreateGuiConfiguration();
 			GuiConfiguration = guiConfiguration;
 
 			NewSession();
