@@ -27,9 +27,11 @@ namespace KeyboordUsage
 
 			Title = $"Keyboord usage v{AppConstants.CurrentVersion} by Kasper B. Graversen";
 
+			var args = new CommandLineParser().ParseCommandLine();
+
 			var style = (Style)FindResource("InformButton");
 
-			configurationRepository = new ConfigurationRepository(new UserStateStandardConfiguraion());
+			configurationRepository = new ConfigurationRepository(new UserStateStandardConfiguraion(args));
 
 			keyboards = configurationRepository.GetKeyboards(style);
 

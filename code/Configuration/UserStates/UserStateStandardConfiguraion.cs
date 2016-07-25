@@ -7,6 +7,13 @@ namespace KeyboordUsage.Configuration.UserStates
 {
 	class UserStateStandardConfiguraion
 	{
+		private readonly CommandLineArgs commandLineArgs;
+
+		public UserStateStandardConfiguraion(CommandLineArgs commandLineArgs)
+		{
+			this.commandLineArgs = commandLineArgs;
+		}
+
 		public UserState CreateDefaultState()
 		{
 			var stdKeyClassConfiguration = CreateStdKeyClassConfiguration();
@@ -23,23 +30,32 @@ namespace KeyboordUsage.Configuration.UserStates
 		public KeyClassConfiguration CreateStdKeyClassConfiguration()
 		{
 			var destructionKeys = KeyboardConstants.CombineKeysWithStandardModifiers(new[] { "Back", "Delete" });
-			var navKeys = KeyboardConstants.CombineKeysWithStandardModifiers(new[] { "Home", "PageUp", "End", "Next", "Up", "Left", "Down", "Right" });
 
-			var metaKeys = new[]
+			var navs = new [] { "Home", "PageUp", "End", "Next", "Up", "Left", "Down", "Right" };
+			var navKeys = KeyboardConstants.CombineKeysWithStandardModifiers(navs);
+
+			if (commandLineArgs.UseVisualStudioNavigation)
+			{
+				navKeys.AddRange(KeyboardConstants.CombineKeysWithStandardModifiers(new[] {"F3", "F12"}));
+				navKeys.AddRange(KeyboardConstants.KeysCombinedWithCodeModifiers(new[] {"T", "F6", "F7", "F8"}));
+
+				navKeys.Add("G, Control");
+
+				navKeys.AddRange(KeyboardConstants.KeysCombinedWithControlAndShiftControl(new[] { "OemMinus", "Tab", "I" }));
+
+				navKeys.Add("A, Shift, Control, Alt");
+			}
+
+			var metaKeys = new List<string>()
 			{
 				"Escape",
 				"F1",
 				"F2",
-				"F3",
 				"F4",
 				"F5",
-				"F6",
-				"F7",
-				"F8",
 				"F9",
 				"F10",
 				"F11",
-				"F12",
 				"LControlKey",
 				"RLControlKey",
 				"LWin",
@@ -48,7 +64,11 @@ namespace KeyboordUsage.Configuration.UserStates
 				"Fn",
 				"Apps"
 			};
-			var meta = KeyboardConstants.CombineKeysWithStandardModifiers(metaKeys);
+			if (!commandLineArgs.UseVisualStudioNavigation)
+			{
+				metaKeys.AddRange(new [] { "F3", "F6", "F7", "F8", "F12"});
+			}
+			var meta = KeyboardConstants.CombineKeysWithStandardModifiers(metaKeys.ToArray());
 
 			return new KeyClassConfiguration()
 			{

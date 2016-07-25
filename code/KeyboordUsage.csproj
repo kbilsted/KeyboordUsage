@@ -73,6 +73,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppConstants.cs" />
+    <Compile Include="CommandLineParser.cs" />
     <Compile Include="Configuration\ConfigurationRepository.cs" />
     <Compile Include="Configuration\Keyboard\JsonKeyboard.cs" />
     <Compile Include="Configuration\Keyboard\KeyboardConfiguration.cs" />

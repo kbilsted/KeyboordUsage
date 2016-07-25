@@ -38,7 +38,7 @@ namespace KeyboordUsage.Configuration.UserStates
 		public UserState(string configurationVersion, RecodingSession accumulated, List<RecodingSession> pastSessions, GuiConfiguration guiConfiguration, KeyClassConfiguration keyclasses)
 		{
 			ConfigurationVersion = configurationVersion;
-			var standardConfiguraion = new UserStateStandardConfiguraion();
+			var standardConfiguraion = new UserStateStandardConfiguraion(new CommandLineArgs(false));
 
 			if (keyclasses == null)
 			{
