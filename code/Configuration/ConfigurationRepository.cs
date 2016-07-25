@@ -34,7 +34,7 @@ namespace KeyboordUsage.Configuration
 				return UserStateStandardConfiguraion.CreateDefaultState();
 			}
 
-			if (state.ConfigurationVersion != AppConstants.CurrentVersion)
+			if (!AppConstants.CompatibleFileFormatVersions.Contains(state.ConfigurationVersion))
 			{
 				var answer = MessageBox.Show(
 					null,
