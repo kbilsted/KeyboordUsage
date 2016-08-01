@@ -20,7 +20,7 @@ namespace KeyboordUsage
 		{
 			globalHook = Hook.GlobalEvents();
 
-			globalHook.MouseDownExt += GlobalHookMouseDownExt;
+			//globalHook.MouseDownExt += GlobalHookMouseDownExt;
 			//globalHook.KeyDown += RecordDown;
 			globalHook.KeyUp += RecordKeyUp;
 		}
@@ -40,7 +40,7 @@ namespace KeyboordUsage
 
 		private void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)
 		{
-			Console.WriteLine("MouseDown: \t{0}; \t System Timestamp: \t{1}", e.Button, e.Timestamp);
+			//Console.WriteLine("MouseDown: \t{0}; \t System Timestamp: \t{1}", e.Button, e.Timestamp);
 
 			// uncommenting the following line will suppress the middle mouse button click
 			// if (e.Buttons == MouseButtons.Middle) { e.Handled = true; }
@@ -48,7 +48,7 @@ namespace KeyboordUsage
 
 		public void Closing()
 		{
-			globalHook.MouseDownExt -= GlobalHookMouseDownExt;
+			//globalHook.MouseDownExt -= GlobalHookMouseDownExt;
 			globalHook.KeyUp -= RecordKeyUp;
 			//globalHook.KeyDown -= RecordDown;
 
