@@ -30,6 +30,8 @@ namespace KeyboordUsage.Configuration.UserStates
 		public KeyClassConfiguration CreateStdKeyClassConfiguration()
 		{
 			var destructionKeys = KeyboardConstants.CombineKeysWithStandardModifiers(new[] { "Back", "Delete" });
+			destructionKeys.Add("Z, Control");
+			destructionKeys.Add("X, Control");
 
 			var navs = new [] { "Home", "PageUp", "End", "Next", "Up", "Left", "Down", "Right" };
 			var navKeys = KeyboardConstants.CombineKeysWithStandardModifiers(navs);
