@@ -47,6 +47,8 @@ namespace KeyboordUsage.Configuration.UserStates
 				navKeys.AddRange(KeyboardConstants.KeysCombinedWithControlAndShiftControl(new[] { "OemMinus", "Tab", "I" }));
 
 				navKeys.Add("A, Shift, Control, Alt");
+
+				navKeys.Add("L, Shift, Alt");
 			}
 
 			var metaKeys = new List<string>()
