@@ -35,13 +35,13 @@ namespace KeyboordUsage.Configuration.UserStates
 
 			var navs = new [] { "Home", "PageUp", "End", "Next", "Up", "Left", "Down", "Right" };
 			var navKeys = KeyboardConstants.CombineKeysWithStandardModifiers(navs);
+			navKeys.Add("G, Control");
 
 			if (commandLineArgs.UseVisualStudioNavigation)
 			{
 				navKeys.AddRange(KeyboardConstants.CombineKeysWithStandardModifiers(new[] {"F3", "F12"}));
 				navKeys.AddRange(KeyboardConstants.KeysCombinedWithCodeModifiers(new[] {"T", "F6", "F7", "F8"}));
 
-				navKeys.Add("G, Control");
 
 				navKeys.AddRange(KeyboardConstants.KeysCombinedWithControlAndShiftControl(new[] { "OemMinus", "Tab", "I" }));
 
