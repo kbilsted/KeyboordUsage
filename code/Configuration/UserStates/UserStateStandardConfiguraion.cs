@@ -30,6 +30,7 @@ namespace KeyboordUsage.Configuration.UserStates
 		public KeyClassConfiguration CreateStdKeyClassConfiguration()
 		{
 			var destructionKeys = KeyboardConstants.CombineKeysWithStandardModifiers(new[] { "Back", "Delete" });
+			destructionKeys.Add("L, Control");
 			destructionKeys.Add("Z, Control");
 			destructionKeys.Add("X, Control");
 
