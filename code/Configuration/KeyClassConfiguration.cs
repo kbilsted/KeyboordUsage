@@ -5,7 +5,6 @@ namespace KeyboordUsage.Configuration
 {
 	public class KeyClassConfiguration
 	{
-		public List<string> ProductiveKeyData = new List<string>();
 		public List<string> DestructiveKeyData = new List<string>();
 		public List<string> NaviationKeyData = new List<string>();
 		public List<string> MetaKeyData = new List<string>();
