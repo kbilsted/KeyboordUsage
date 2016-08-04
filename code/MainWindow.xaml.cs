@@ -117,7 +117,7 @@ namespace KeyboordUsage
 
 		private void MenuItem_ClearStatistics(object sender, RoutedEventArgs e)
 		{
-			var answer = MessageBox.Show(this, "Are you sure you want to clear all statistics? A backup is made in your temp folder.", "Clear recorded statistics", MessageBoxButton.YesNo);
+			var answer = MessageBox.Show(this, "Are you sure you want to clear typing statistics? A backup is made in your temp folder. Keyclass settings are untouched.", "Clear recorded statistics", MessageBoxButton.YesNo);
 
 			if (answer == MessageBoxResult.Yes)
 			{
