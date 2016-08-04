@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using KeyboordUsage.Configuration.Keyboard;
 
@@ -29,31 +30,16 @@ namespace KeyboordUsage.Configuration.UserStates
 
 		public KeyClassConfiguration CreateStdKeyClassConfiguration()
 		{
-			var destructionKeys = KeyboardConstants.CombineKeysWithStandardModifiers(new[] { "Back", "Delete" });
-			destructionKeys.Add("L, Control");
-			destructionKeys.Add("Z, Control");
-			destructionKeys.Add("X, Control");
-			destructionKeys.Add("Tab, Shift");
-
-			var navs = new [] { "Home", "PageUp", "End", "Next", "Up", "Left", "Down", "Right" };
-			var navKeys = KeyboardConstants.CombineKeysWithStandardModifiers(navs);
-			navKeys.Add("G, Control");
-			navKeys.Add("Tab, Alt");
-			navKeys.Add("Tab, Control");
-			navKeys.Add("Tab, Shift, Control");
-
-			if (commandLineArgs.UseVisualStudioNavigation)
+			return new KeyClassConfiguration()
 			{
-				navKeys.AddRange(KeyboardConstants.CombineKeysWithStandardModifiers(new[] {"F3", "F12"}));
-				navKeys.AddRange(KeyboardConstants.KeysCombinedWithCodeModifiers(new[] {"T", "F6", "F7", "F8"}));
+				DestructiveKeyData = DestructionKeys(),
+				MetaKeyData = MetaKeys(),
+				NaviationKeyData = NavKeys(),
+			};
+		}
 
-				navKeys.AddRange(KeyboardConstants.KeysCombinedWithControlAndShiftControl(new[] { "OemMinus", "Tab", "I" }));
-
-				navKeys.Add("A, Shift, Control, Alt");
-
-				navKeys.Add("L, Shift, Alt");
-			}
-
+		private List<string> MetaKeys()
+		{
 			var metaKeys = new List<string>()
 			{
 				"Escape",
@@ -72,18 +58,50 @@ namespace KeyboordUsage.Configuration.UserStates
 				"Fn",
 				"Apps"
 			};
+
 			if (!commandLineArgs.UseVisualStudioNavigation)
 			{
-				metaKeys.AddRange(new [] { "F3", "F6", "F7", "F8", "F12"});
+				metaKeys.AddRange(new[] {"F6", "F7", "F8", "F12"});
 			}
 			var meta = KeyboardConstants.CombineKeysWithStandardModifiers(metaKeys.ToArray());
 
-			return new KeyClassConfiguration()
+			return meta.OrderBy(x => x).ToList();
+		}
+
+		private List<string> NavKeys()
+		{
+			var navs = new[] {"Home", "PageUp", "End", "Next", "Up", "Left", "Down", "Right"};
+			var navKeys = KeyboardConstants.CombineKeysWithStandardModifiers(navs);
+			navKeys.Add("G, Control");
+			navKeys.Add("Tab, Alt");
+			navKeys.Add("Tab, Control");
+			navKeys.Add("Tab, Shift, Control");
+			navKeys.AddRange(KeyboardConstants.CombineKeysWithStandardModifiers(new[] { "F3" }));
+
+			if (commandLineArgs.UseVisualStudioNavigation)
 			{
-				DestructiveKeyData = destructionKeys,
-				MetaKeyData = meta,
-				NaviationKeyData = navKeys,
-			};
+				navKeys.AddRange(KeyboardConstants.CombineKeysWithStandardModifiers(new[] {"F12"}));
+				navKeys.AddRange(KeyboardConstants.KeysCombinedWithCodeModifiers(new[] {"T", "F6", "F7", "F8"}));
+
+				navKeys.AddRange(KeyboardConstants.KeysCombinedWithControlAndShiftControl(new[] {"OemMinus", "Tab", "I"}));
+
+				navKeys.Add("A, Shift, Control, Alt");
+
+				navKeys.Add("L, Shift, Alt");
+			}
+
+			return navKeys.OrderBy(x => x).ToList();
+		}
+
+		private static List<string> DestructionKeys()
+		{
+			var destructionKeys = KeyboardConstants.CombineKeysWithStandardModifiers(new[] {"Back", "Delete"});
+			destructionKeys.Add("L, Control");
+			destructionKeys.Add("Z, Control");
+			destructionKeys.Add("X, Control");
+			destructionKeys.Add("Tab, Shift");
+
+			return destructionKeys.OrderBy(x => x).ToList();
 		}
 	}
 }
