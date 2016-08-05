@@ -14,7 +14,9 @@ namespace KeyboordUsage
 		private readonly Action<string> updateCurrentKey;
 		private readonly Action<string> updateKeyPopularity;
 		private readonly Action<double> updateProductiveRatio;
+		private readonly Action<double> updateDestructiveRatio;
 		private readonly Action<double> updateNaviationRatio;
+		private readonly Action<double> updateMetaRatio;
 		private readonly KeysCounter counter;
 		private string currentKey = "";
 
@@ -23,7 +25,9 @@ namespace KeyboordUsage
 			Action<string> updateCurrentKey, 
 			Action<string> updateKeyPopularity, 
 			Action<double> updateProductiveRatio,
+			Action<double> updateDestructiveRatio,
 			Action<double> updateNaviationRatio,
+			Action<double> updateMetaRatio,
 			KeysCounter counter, 
 			GuiKeyboard keyboard)
 		{
@@ -31,7 +35,9 @@ namespace KeyboordUsage
 			this.updateCurrentKey = updateCurrentKey;
 			this.updateKeyPopularity = updateKeyPopularity;
 			this.updateProductiveRatio = updateProductiveRatio;
+			this.updateDestructiveRatio = updateDestructiveRatio;
 			this.updateNaviationRatio = updateNaviationRatio;
+			this.updateMetaRatio = updateMetaRatio;
 			this.counter = counter;
 			this.keyboard = keyboard;
 		}
@@ -42,7 +48,9 @@ namespace KeyboordUsage
 			updateKeyPopularity(cachedKeyPopularity);
 
 			updateProductiveRatio(counter.GetProductiveRatio());
+			updateDestructiveRatio(counter.GetDestructiveRatio());
 			updateNaviationRatio(counter.GetNavigationRatio());
+			updateMetaRatio(counter.GetMetaRatio());
 
 			updateCurrentKey(currentKey);
 

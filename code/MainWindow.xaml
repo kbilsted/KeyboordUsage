@@ -26,13 +26,17 @@
 				<DockPanel>
 					<StackPanel DockPanel.Dock="Left">
 						<Label Padding="3" ToolTip="The last key pressed">Current Key:</Label>
-						<Label Padding="3" ToolTip="The ratio between producing text and deleting text">Productive ratio:</Label>
-						<Label Padding="3" ToolTip="The ratio between editing and navigating text">Navigation ratio:</Label>
+						<Label Padding="3" ToolTip="How many text producing keypresses">Productive:</Label>
+						<Label Padding="3" ToolTip="How many deletes">Destructive:</Label>
+						<Label Padding="3" ToolTip="How many navigation presses">Navigation:</Label>
+						<Label Padding="3" ToolTip="How many meta-key presses">Meta:</Label>
 					</StackPanel>
 					<StackPanel DockPanel.Dock="Right">
 						<Label Padding="3" ToolTip="The last key pressed" Name="CurrentKey" />
-						<Label Padding="3" ToolTip="The ratio between producing text and deleting text" Name="ProductiveRatio"  />
-						<Label Padding="3" ToolTip="The ratio between editing and navigating text" Name="NavigationRatio"  />
+						<Label Padding="3" ToolTip="The amount of productive keypresses" Name="ProductiveRatio"  />
+						<Label Padding="3" ToolTip="The amount of destructive keypresses" Name="DestructiveRatio"  />
+						<Label Padding="3" ToolTip="The amount of navigation keypresses" Name="NavigationRatio"  />
+						<Label Padding="3" ToolTip="The amount of meta-key keypresses" Name="MetaRatio"  />
 					</StackPanel>
 				</DockPanel>
 			</GroupBox>

@@ -46,5 +46,15 @@ namespace KeyboordUsage
 		{
 			return state.GetAccumulated().Ratios.CalculateNavigationRatio();
 		}
+
+		public double GetDestructiveRatio()
+		{
+			return state.GetAccumulated().Ratios.CalculateDestructiveRatio();
+		}
+
+		public double GetMetaRatio()
+		{
+			return state.GetAccumulated().Ratios.CalculateMetaRatio();
+		}
 	}
 }	

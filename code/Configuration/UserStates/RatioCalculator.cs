@@ -28,26 +28,35 @@ namespace KeyboordUsage.Configuration.UserStates
 			Records[keyClass] += 1;
 		}
 
-		public double CalculateProductiveRatio()
+		private double Calc(KeyClass selector)
 		{
-			double sum = Records[KeyClass.Productive] + Records[KeyClass.Destructive];
+			double sum = Records[KeyClass.Productive] + Records[KeyClass.Destructive] + Records[KeyClass.Navigation] + Records[KeyClass.Meta];
 			if (sum == 0d)
 				return 0;
 
-			var ratio = Records[KeyClass.Productive] / sum;
+			var ratio = Records[selector] / sum;
 
 			return ToTwoDidigts(ratio * 100d);
 		}
 
+		public double CalculateProductiveRatio()
+		{
+			return Calc(KeyClass.Productive);
+		}
+
+		public double CalculateDestructiveRatio()
+		{
+			return Calc(KeyClass.Destructive);
+		}
+
 		public double CalculateNavigationRatio()
 		{
-			double sum = Records[KeyClass.Productive] + Records[KeyClass.Destructive] + Records[KeyClass.Navigation];
-			if (sum == 0d)
-				return 0;
+			return Calc(KeyClass.Navigation);
+		}
 
-			var ratio = Records[KeyClass.Navigation] / sum;
-
-			return ToTwoDidigts(ratio * 100d);
+		public double CalculateMetaRatio()
+		{
+			return Calc(KeyClass.Meta);
 		}
 
 		double ToTwoDidigts(double d)
