@@ -44,15 +44,15 @@ namespace KeyboordUsage
 
 		public void ForceRepaint()
 		{
-			cachedKeyPopularity = GetKeyPopularity();
-			updateKeyPopularity(cachedKeyPopularity);
+			updateCurrentKey(currentKey);
 
 			updateProductiveRatio(counter.GetProductiveRatio());
 			updateDestructiveRatio(counter.GetDestructiveRatio());
 			updateNaviationRatio(counter.GetNavigationRatio());
 			updateMetaRatio(counter.GetMetaRatio());
 
-			updateCurrentKey(currentKey);
+			cachedKeyPopularity = GetKeyPopularity();
+			updateKeyPopularity(cachedKeyPopularity);
 
 			new HeatmapPainter(keyboard, counter).Do();
 		}
