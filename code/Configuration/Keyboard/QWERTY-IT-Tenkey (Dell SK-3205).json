@@ -60,7 +60,7 @@
 				{ "Label1": "↤", "Label2": "↦", "KeyCode": "Tab", "Width":1.8 },
 				{ "Label1": "Q", "KeyCode": "Q" },
 				{ "Label1": "W", "KeyCode": "W" },
-				{ "Label1": "E", "KeyCode": "E" },
+				{ "Label1": "E", "Label4": "€", "KeyCode": "E" },
 				{ "Label1": "R", "KeyCode": "R" },
 				{ "Label1": "T", "KeyCode": "T" },
 				{ "Label1": "Y", "KeyCode": "Y" },
