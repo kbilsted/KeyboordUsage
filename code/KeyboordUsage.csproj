@@ -141,6 +141,9 @@
     <None Include="Configuration\Keyboard\QWERTY-IT-Tenkey %28IBM Model M%29.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Configuration\Keyboard\QWERTY-IT-Tenkeyless %28Filco Majestouch 2%29.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
