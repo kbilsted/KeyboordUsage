@@ -23,42 +23,51 @@ namespace KeyboordUsage
 
 		public MainWindow()
 		{
-			InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-			Title = $"Keyboord usage v{AppConstants.CurrentVersion} by Kasper B. Graversen";
+                Title = $"Keyboord usage v{AppConstants.CurrentVersion} by Kasper B. Graversen";
 
-			var args = new CommandLineParser().ParseCommandLine();
+                var args = new CommandLineParser().ParseCommandLine();
 
-			var style = (Style)FindResource("InformButton");
+                var style = (Style)FindResource("InformButton");
 
-			configurationRepository = new ConfigurationRepository(new UserStateStandardConfiguraion(args));
+                configurationRepository = new ConfigurationRepository(new UserStateStandardConfiguraion(args));
 
-			keyboards = configurationRepository.GetKeyboards(style);
+                keyboards = configurationRepository.GetKeyboards(style);
 
-			state = configurationRepository.LoadUserState();
-			var userState = new DailySessionDecorator(state);
-			var counter = new KeysCounter(userState);
+                state = configurationRepository.LoadUserState();
+                var userState = new DailySessionDecorator(state);
+                var counter = new KeysCounter(userState);
 
-			keyPressController = new KeyPressController(
-				() => WindowState == WindowState.Minimized,
-				x => CurrentKey.Content = x,
-				x => KeyHistory.Text = x,
-				x => ProductiveRatio.Content = x.ToString() + "%",
-				x => DestructiveRatio.Content = x.ToString() + "%",
-				x => NavigationRatio.Content = x.ToString() + "%",
-				x => MetaRatio.Content = x.ToString() + "%",
-				counter,
-				null);
+                keyPressController = new KeyPressController(
+                    () => WindowState == WindowState.Minimized,
+                    x => CurrentKey.Content = x,
+                    x => KeyHistory.Text = x,
+                    x => ProductiveRatio.Content = x.ToString() + "%",
+                    x => DestructiveRatio.Content = x.ToString() + "%",
+                    x => NavigationRatio.Content = x.ToString() + "%",
+                    x => MetaRatio.Content = x.ToString() + "%",
+                    counter,
+                    null);
 
-			listener = new KeyboardListener(counter, keyPressController);
-			listener.Subscribe();
+                listener = new KeyboardListener(counter, keyPressController);
+                listener.Subscribe();
 
-			ResizeWindow(state);
+                ResizeWindow(state);
 
-			KeyboardChooser.ItemsSource = keyboards.Select(x => x.Name);
-			KeyboardChooser.SelectedIndex = state.GetGuiConfiguration().SelectedKeyboardIndex;
+                KeyboardChooser.ItemsSource = keyboards.Select(x => x.Name);
+                KeyboardChooser.SelectedIndex = state.GetGuiConfiguration().SelectedKeyboardIndex;
 
-			keyPressController.ForceRepaint();
+                keyPressController.ForceRepaint();
+            }
+            catch (Exception e)
+            {
+                ExceptionShower.Do(e);
+                Console.WriteLine(e.Message);
+                throw;
+            }
 		}
 
 		private void ResizeWindow(IUserState state)

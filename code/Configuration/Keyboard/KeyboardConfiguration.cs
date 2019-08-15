@@ -74,10 +74,10 @@ namespace KeyboordUsage.Configuration.Keyboard
 				&& string.IsNullOrWhiteSpace(Label2)
 				&& string.IsNullOrWhiteSpace(Label3)
 				&& string.IsNullOrWhiteSpace(Label4))
-				throw new ArgumentException("Label1-4 must have a value when you define a key");
+				throw new ArgumentException($"At least one label must have a value when you define keycode '{KeyCode}'");
 
 			if (string.IsNullOrWhiteSpace(KeyCode) )
-		 		throw new ArgumentException("KeyCode must have a value when you define a key");
+		 		throw new ArgumentException($"KeyCode must have a value when you define key with labels '{Label1}','{Label2}','{Label3}','{Label4}'");
 		}
 	}
 }
