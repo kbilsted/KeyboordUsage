@@ -7,7 +7,7 @@ Top features
 
   * No communication with external servers - your typing is saved only on your computer
   * Configurable keyboard layout (just edit a json-file to customize language, placement of keys etc)
-    * Support for any language, not just US keyboards (configuration for US and DK is shipped with the release)
+    * Support for any language, not just US keyboards (configuration for US/GB, Italian and Danish is shipped with the release)
     * Support for any keyboard layout (configuration for QWERTY, DVORAK, TenKeyless is shipped with the release)
   * Showing the ratio between producing text and deleting text (*productive ratio*)
   * Showing the ratio between editing and navigating text (*navigation ratio*)
